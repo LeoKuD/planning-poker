@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Home = () => {
+export const Home: React.FC<HTMLElement> = () => {
   const [welcomeMsg, setWelcomeMsg] = useState<string>('');
 
   useEffect(() => {
@@ -13,9 +13,7 @@ const Home = () => {
 
   return (
     <div className="App-header">
-      <p>{welcomeMsg}</p>
+      <h2>{welcomeMsg}</h2>
     </div>
   );
 };
-
-export default Home;

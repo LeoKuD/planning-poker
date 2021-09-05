@@ -4,7 +4,7 @@ import * as types from '../actions/auth/types';
 const initialState: IAuth = {
   isLoading: true,
   currentUser: null,
-  err: ''
+  err: '',
 };
 
 export const authReducer = (state = initialState, action: Action): IAuth => {
@@ -12,48 +12,48 @@ export const authReducer = (state = initialState, action: Action): IAuth => {
     case types.LOGIN:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     case types.LOGIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        currentUser: action.payload
+        currentUser: action.payload,
       };
     case types.REGITSER:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     case types.REGISTER_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        currentUser: action.payload
+        currentUser: action.payload,
       };
     case types.GET_PROFILE:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     case types.GET_PROFILE_SUCCESS:
       return {
         ...state,
         isLoading: false,
         err: '',
-        currentUser: action.payload
+        currentUser: action.payload,
       };
     case types.AUTH_REQUEST_FAILURE:
       return {
         ...state,
         isLoading: false,
-        err: action.payload
+        err: action.payload,
       };
     case types.LOGOUT:
       return {
         ...state,
         isLoading: false,
-        currentUser: null
+        currentUser: null,
       };
     default:
       return state;

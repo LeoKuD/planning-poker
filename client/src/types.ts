@@ -12,7 +12,7 @@ export type CurrentUser = {
 
 export type Action = {
   type: string;
-  payload: any;
+  payload?: any;
 };
 
 export interface IStore {

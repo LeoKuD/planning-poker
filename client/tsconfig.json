@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "lib": [
       "dom",
       "dom.iterable",
@@ -14,7 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "alwaysStrict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -24,6 +25,7 @@
     "strictBindCallApply": true,
     "target": "es5",
     "strict": true,
+    "noFallthroughCasesInSwitch": true,
     "module": "esnext"
   },
   "include": [

@@ -1,27 +1,31 @@
-import * as types from './types';
 import { Dispatch } from 'react';
+import * as types from './types';
 
 import * as utils from '../../../utils';
+import { Action } from '../../../types';
 
-const createGetProfile = () => {
-  return {
-    type: types.GET_PROFILE
-  };
-};
+const createGetProfile = (): Action => ({
+  type: types.GET_PROFILE,
+});
 
-const getProfileSuccess = (data: any) => {
-  return {
-    type: types.GET_PROFILE_SUCCESS,
-    payload: data
-  };
-};
+const getProfileSuccess = (data: any): Action => ({
+  type: types.GET_PROFILE_SUCCESS,
+  payload: data,
+});
 
 const catchAuthRequestErr = (err: any) => (dispatch: Dispatch<any>) => {
   dispatch({
     type: types.AUTH_REQUEST_FAILURE,
-    payload: err.message
+    payload: err.message,
   });
   console.log(err);
+};
+
+export const userLoggedOut = () => (dispatch: Dispatch<any>) => {
+  localStorage.removeItem(process.env.REACT_APP_LOCAL_TOKEN as string);
+  dispatch({
+    type: types.LOGOUT,
+  });
 };
 
 export const getProfile = (history: any) => async (dispatch: Dispatch<any>) => {
@@ -39,11 +43,4 @@ export const getProfile = (history: any) => async (dispatch: Dispatch<any>) => {
   } else {
     dispatch(userLoggedOut());
   }
-};
-
-export const userLoggedOut = () => (dispatch: Dispatch<any>) => {
-  localStorage.removeItem(process.env.REACT_APP_LOCAL_TOKEN as string);
-  dispatch({
-    type: types.LOGOUT
-  });
 };

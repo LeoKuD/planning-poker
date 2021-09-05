@@ -7,8 +7,6 @@ interface IPrivateRoute {
 const PrivateRoute: FC<IPrivateRoute & RouteProps> = ({
   isLoggedIn,
   ...rest
-}) => {
-  return isLoggedIn ? <Route {...rest} /> : <Redirect to="/login" />;
-};
+}) => (isLoggedIn ? <Route {...rest} /> : <Redirect to="/login" />);
 
 export default PrivateRoute;

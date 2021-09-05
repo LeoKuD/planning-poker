@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
-import Home from './pages/Home';
-import Demo from './pages/Demo';
-import Login from './pages/Login';
-import { Switch, Route, useHistory, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  Switch, Route, useHistory, Redirect,
+} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Lobby } from './pages/Lobby';
+import { Game } from './pages/Game';
+import { Home } from './pages/Home';
 import { getProfile } from './redux/actions/auth/actions';
-import PrivateRoute from './components/private-route';
-import { IStore } from './types';
 
 import './App.css';
 
-function App() {
+const App: React.FC<Record<string, never>> = () => {
   const dispatch = useDispatch();
-
   const history = useHistory();
-
-  const { currentUser, isLoading } = useSelector((state: IStore) => state.auth);
+  const isLoading = false;
 
   useEffect(() => {
     dispatch(getProfile(history));
@@ -27,13 +25,8 @@ function App() {
         {!isLoading ? (
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            
-            <PrivateRoute
-              isLoggedIn={!!currentUser}
-              path="/demo"
-              component={Demo}
-            />
+            <Route path="/game" component={Game} />
+            <Route path="/lobby" component={Lobby} />
             <Route>
               <Redirect to="/demo" />
             </Route>
@@ -44,7 +37,7 @@ function App() {
               height: '100%',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
             }}
           >
             Loading...
@@ -53,6 +46,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
 export default App;
