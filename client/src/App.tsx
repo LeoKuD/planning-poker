@@ -3,6 +3,7 @@ import {
   Switch, Route, useHistory, Redirect,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Footer } from './components/footer/Footer';
 import { Lobby } from './pages/Lobby';
 import { Game } from './pages/Game';
 import { Home } from './pages/Home';
@@ -23,14 +24,17 @@ const App: React.FC<Record<string, never>> = () => {
     <>
       <div className="App">
         {!isLoading ? (
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/game" component={Game} />
-            <Route path="/lobby" component={Lobby} />
-            <Route>
-              <Redirect to="/demo" />
-            </Route>
-          </Switch>
+          <>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/game" component={Game} />
+              <Route path="/lobby" component={Lobby} />
+              <Route>
+                <Redirect to="/demo" />
+              </Route>
+            </Switch>
+            <Footer />
+          </>
         ) : (
           <div
             style={{

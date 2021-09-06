@@ -3,3 +3,4 @@
 *.html
 *.svg
 serviceWorker.ts
+/assets/img
