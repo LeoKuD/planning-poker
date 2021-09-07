@@ -64,7 +64,7 @@ const LoginForm: FC<LoginFormProps> = ({ userImage, closeForm }) => {
       </form>
 
       <img src={userImage} alt="userImage" />
-      <button type="button" onClick={() => { closeForm(); }}>Cancel</button>
+      <button type="button" onClick={closeForm}>Cancel</button>
     </>
   );
 };
