@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import s from './index.module.css';
-import { useForm } from "react-hook-form";
-import { Switch } from "@material-ui/core";
+import { useForm } from 'react-hook-form';
+import { Switch } from '@material-ui/core';
+import s from './index.module.scss';
 
 type FormData = {
   firstName: string;
@@ -12,9 +12,8 @@ type FormData = {
 };
 
 const LoginForm: FC = () => {
-
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-  const onSubmit = handleSubmit(data => console.log(data));
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = handleSubmit((data: FormData) => console.log(data));
 
   return (
     <>
@@ -23,44 +22,44 @@ const LoginForm: FC = () => {
         <h2>Connect to lobby</h2>
         <label htmlFor="firstName">First Name</label>
         <input
-          className={s.inputField} 
-          {...register("firstName", { 
-          required: true,
-          maxLength: {
-            value: 30,
-            message: "first name must be less than 30 characters",
+          className={s.inputField}
+          {...register('firstName', {
+            required: true,
+            maxLength: {
+              value: 30,
+              message: 'first name must be less than 30 characters',
             },
           })}
         />
         <div className={s.error}>{errors.firstName?.message}</div>
 
         <label htmlFor="lastName">Last Name</label>
-        <input 
+        <input
           className={s.inputField}
-          {...register("lastName", { 
-          maxLength: {
-            value: 30,
-            message: "first name must be less than 30 characters",
+          {...register('lastName', {
+            maxLength: {
+              value: 30,
+              message: 'first name must be less than 30 characters',
             },
           })}
         />
         <div className={s.error}>{errors.lastName?.message}</div>
 
         <label htmlFor="role">Connect as observer</label>
-        <Switch color='primary' {...register('role', { required: true })} />
+        <Switch color="primary" {...register('role', { required: true })} />
         <div className={s.error}>{errors.role?.message}</div>
 
         <label htmlFor="position">Your job position</label>
-        <input className={s.inputField} {...register("position")} />
+        <input className={s.inputField} {...register('position')} />
 
         <label htmlFor="image">Image:</label>
-        <input type="file" {...register("image")} />
+        <input type="file" {...register('image')} />
 
-        <input role="button" className={s.submit} type="submit" />
+        <input className={s.submit} type="submit" />
 
       </form>
     </>
-  )
+  );
 };
 
 export default LoginForm;
