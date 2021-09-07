@@ -3,9 +3,9 @@ import {
   Switch, Route, useHistory, Redirect,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Lobby } from './pages/Lobby';
-import { Game } from './pages/Game';
-import { Home } from './pages/Home';
+import Lobby from './pages/Lobby';
+import Game from './pages/Game';
+import Home from './pages/Home';
 import { getProfile } from './redux/actions/auth/actions';
 
 import './App.css';
