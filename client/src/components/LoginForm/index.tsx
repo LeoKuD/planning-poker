@@ -6,7 +6,7 @@ import style from './index.module.scss';
 type FormData = {
   firstName: string;
   lastName?: string;
-  role: string;
+  observer: string;
   position?: string;
   image?: string;
 };
@@ -50,9 +50,9 @@ const LoginForm: FC<LoginFormProps> = ({ userImage, closeForm }) => {
         />
         <div className={style.error}>{errors.lastName?.message}</div>
 
-        <label htmlFor="role">Connect as observer</label>
-        <Switch color="primary" {...register('role', { required: true })} />
-        <div className={style.error}>{errors.role?.message}</div>
+        <label htmlFor="observer">Connect as observer</label>
+        <Switch color="primary" {...register('observer')} />
+        <div className={style.error}>{errors.observer?.message}</div>
 
         <label htmlFor="position">Your job position</label>
         <input className={style.inputField} {...register('position')} />

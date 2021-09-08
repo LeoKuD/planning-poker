@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import style from './index.module.scss';
 import logo from '../../assets/main-page-logo.svg';
+import LoginForm from '../../components/LoginForm';
 
 type LayoutProps = {
   startNewGame: () => void,
@@ -75,7 +76,7 @@ const Home: React.FC<HTMLElement> = () => {
   return (
     <>
       <h2>{welcomeMsg}</h2>
-      <Layout startNewGame={startNewGame} connect={connect} />
+      <LoginForm closeForm={startNewGame} />
     </>
   );
 };
