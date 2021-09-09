@@ -12,11 +12,11 @@ enum FormControls {
 }
 
 type FormData = {
-  firstName: string;
-  lastName?: string;
-  observer: string;
-  position?: string;
-  image?: string;
+  [FormControls.firstName]: string;
+  [FormControls.lastName]?: string;
+  [FormControls.observer]: string;
+  [FormControls.position]?: string;
+  [FormControls.image]?: string;
 }
 
 type LoginFormProps = {
