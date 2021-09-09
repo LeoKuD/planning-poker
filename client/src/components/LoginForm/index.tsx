@@ -3,15 +3,23 @@ import { useForm } from 'react-hook-form';
 import { Switch } from '@material-ui/core';
 import style from './index.module.scss';
 
-type FormData = {
-  firstName: string;
-  lastName?: string;
-  role: string;
-  position?: string;
-  image?: string;
-};
+enum FormControls {
+  firstName = 'firstName',
+  lastName = 'lastName',
+  observer = 'observer',
+  position = 'position',
+  image = 'image',
+}
 
-interface LoginFormProps {
+type FormData = {
+  [FormControls.firstName]: string;
+  [FormControls.lastName]?: string;
+  [FormControls.observer]: string;
+  [FormControls.position]?: string;
+  [FormControls.image]?: string;
+}
+
+type LoginFormProps = {
   userImage?: string,
   closeForm: () => void,
 }
@@ -25,10 +33,10 @@ const LoginForm: FC<LoginFormProps> = ({ userImage, closeForm }) => {
       <form className={style.form} onSubmit={onSubmit}>
         <h2>Connect to lobby</h2>
 
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor={FormControls.firstName}>First Name</label>
         <input
           className={style.inputField}
-          {...register('firstName', {
+          {...register(FormControls.firstName, {
             required: true,
             maxLength: {
               value: 30,
@@ -38,10 +46,10 @@ const LoginForm: FC<LoginFormProps> = ({ userImage, closeForm }) => {
         />
         <div className={style.error}>{errors.firstName?.message}</div>
 
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor={FormControls.lastName}>Last Name</label>
         <input
           className={style.inputField}
-          {...register('lastName', {
+          {...register(FormControls.lastName, {
             maxLength: {
               value: 30,
               message: 'first name must be less than 30 characters',
@@ -50,15 +58,15 @@ const LoginForm: FC<LoginFormProps> = ({ userImage, closeForm }) => {
         />
         <div className={style.error}>{errors.lastName?.message}</div>
 
-        <label htmlFor="role">Connect as observer</label>
-        <Switch color="primary" {...register('role', { required: true })} />
-        <div className={style.error}>{errors.role?.message}</div>
+        <label htmlFor={FormControls.observer}>Connect as observer</label>
+        <Switch color="primary" {...register(FormControls.observer)} />
+        <div className={style.error}>{errors.observer?.message}</div>
 
-        <label htmlFor="position">Your job position</label>
-        <input className={style.inputField} {...register('position')} />
+        <label htmlFor={FormControls.position}>Your job position</label>
+        <input className={style.inputField} {...register(FormControls.position)} />
 
-        <label htmlFor="image">Image:</label>
-        <input type="file" {...register('image')} />
+        <label htmlFor={FormControls.image}>Image:</label>
+        <input type="file" {...register(FormControls.image)} />
 
         <input className={style.submit} type="submit" value="Confirm" />
       </form>
