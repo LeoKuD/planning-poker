@@ -44,11 +44,14 @@
         "allowExpressions": true
       }
     ],
-    "max-len": ["warn", { "code": 100 }],
+    "max-len": ["warn", { "code": 120 }],
+    "no-useless-escape": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off",
     "jsx-a11y/label-has-associated-control": [ 1, {
       "required": {
         "every": [ "id" ]
