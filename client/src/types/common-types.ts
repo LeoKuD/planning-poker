@@ -10,6 +10,13 @@ export interface User {
 }
 
 export interface UserData extends User {
-  isYou: boolean,
-  showDeleteButton: boolean
+  isYou?: boolean,
+  showDeleteButton?: boolean
+}
+
+export interface Message {
+  id: number;
+  value: string;
+  user: User;
+  time: Date
 }
