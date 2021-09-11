@@ -1,5 +1,5 @@
 import React from 'react';
-import SettingsForm from 'components/SettingsForm';
+import SettingsForm from 'components/LobbySettings/SettingsForm';
 
 const Lobby: React.FC<HTMLElement> = () => (
   <SettingsForm />
