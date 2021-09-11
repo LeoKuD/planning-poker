@@ -1,9 +1,8 @@
 import React from 'react';
+import SettingsForm from 'components/SettingsForm';
 
 const Lobby: React.FC<HTMLElement> = () => (
-  <h1>
-    Lobby page
-  </h1>
+  <SettingsForm />
 );
 
 export default Lobby;
