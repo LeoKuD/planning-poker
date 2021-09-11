@@ -3,10 +3,9 @@ import {
   Switch, Route, useHistory, Redirect,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Footer } from './components/footer/Footer';
-import { Lobby } from './pages/Lobby';
-import { Game } from './pages/Game';
-import { Home } from './pages/Home';
+import Lobby from './pages/Lobby';
+import Game from './pages/Game';
+import Home from './pages/Home';
 import { getProfile } from './redux/actions/auth/actions';
 
 import './App.css';
@@ -33,7 +32,6 @@ const App: React.FC<Record<string, never>> = () => {
                 <Redirect to="/demo" />
               </Route>
             </Switch>
-            <Footer />
           </>
         ) : (
           <div

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Layout from '../components/Greetings';
 
-export const Home: React.FC<HTMLElement> = () => {
+const Home: React.FC<HTMLElement> = () => {
   const [welcomeMsg, setWelcomeMsg] = useState<string>('');
 
   useEffect(() => {
@@ -11,9 +12,20 @@ export const Home: React.FC<HTMLElement> = () => {
     })();
   }, []);
 
+  const startNewGame = (): void => {
+    console.log('start new game');
+  };
+
+  const connect = (url: string): void => {
+    console.log(url);
+  };
+
   return (
-    <div className="App-header">
+    <>
       <h2>{welcomeMsg}</h2>
-    </div>
+      <Layout startNewGame={startNewGame} connect={connect} />
+    </>
   );
 };
+
+export default Home;
