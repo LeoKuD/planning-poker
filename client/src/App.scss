@@ -12,6 +12,9 @@
   height: 40vmin;
   pointer-events: none;
 }
+.app-content {
+  height: calc(100vh - 179px);
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
