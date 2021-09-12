@@ -7,48 +7,27 @@ const Header: FC = () => (
   <div className={style.header}>
     <img alt="logo" className={style.logo} src={logo} />
     <div className={style.blueLine}>
-      <nav
-        className="style.navContainer"
-        style={{
-          padding: '1em',
-          color: '#fff',
-        }}
-      >
+      <nav className={style.navContainer}>
         <Link
-          style={{
-            padding: '0.5em',
-            color: '#fff',
-          }}
+          className={style.navLink}
           to="/"
         >
           main
         </Link>
         <Link
-          className="style.navLink"
-          style={{
-            padding: '0.5em',
-            color: '#fff',
-          }}
+          className={style.navLink}
           to="game"
         >
           game
         </Link>
         <Link
-          className="style.navLink"
-          style={{
-            padding: '0.5em',
-            color: '#fff',
-          }}
+          className={style.navLink}
           to="lobby"
         >
           lobby
         </Link>
         <Link
-          className="style.navLink"
-          style={{
-            padding: '0.5em',
-            color: '#fff',
-          }}
+          className={style.navLink}
           to="results"
         >
           results

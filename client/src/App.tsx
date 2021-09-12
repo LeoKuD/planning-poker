@@ -9,9 +9,10 @@ import Lobby from 'pages/Lobby';
 import Game from 'pages/Game';
 import Main from 'pages/Main';
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 import { getProfile } from './redux/actions/auth/actions';
 
-import './App.css';
+import './App.scss';
 
 const App: React.FC<Record<string, never>> = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const App: React.FC<Record<string, never>> = () => {
     <>
       <div className="App">
         <Header />
-        <section className="content">
+        <section className="app-content">
           {!isLoading ? (
             <Switch>
               <Route exact path="/" component={Main} />
@@ -48,7 +49,7 @@ const App: React.FC<Record<string, never>> = () => {
             </div>
           )}
         </section>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
   );

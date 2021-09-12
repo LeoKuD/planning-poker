@@ -3,8 +3,9 @@
   grid-area: footer;
   background-color: #2b3a67;
   grid-template: 1fr / minmax(auto, 200px) 1fr minmax(auto, 300px);
-  align-items: center;
+  height: 110px;
   padding: 0px 15px;
+  align-items: center;
   color: white;
 }
 .footer ul {
