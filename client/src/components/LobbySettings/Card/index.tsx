@@ -24,29 +24,30 @@ const Card: FC<CardProps> = ({ edit, cardScore, shortName }) => {
   const onCardClickHandler = ():void => {
     if (edit) {
       return;
-    } setIsCardSelected((prevState: boolean) => !prevState);
+    }
+    setIsCardSelected((prevState: boolean) => !prevState);
   };
 
   return (
     <div
       role="none"
       className={isCardSelected ? style.card_selected : style.card}
-      onClick={() => { onCardClickHandler(); }}
+      onClick={onCardClickHandler}
     >
       {/*
         if cardScore is number then short name "SP" is rendered, else renders string 'break'.
         if edit is true, that means we are in settings component and we can change value of a card.
       */}
       <div className={style.shortName_top}>
-        {cardScore ? shortName : 'break'}
+        <p>{cardScore ? shortName : 'break'}</p>
         {edit && (
-        <div
-          role="none"
+        <button
+          type="button"
           className={style.pencil}
           onClick={() => { setShowInput((prevState: boolean) => !prevState); }}
         >
           Pencil icon
-        </div>
+        </button>
         ) }
       </div>
 
@@ -57,20 +58,18 @@ const Card: FC<CardProps> = ({ edit, cardScore, shortName }) => {
       <div className={style.cardScore}>
         {cardScore || 'coffee icon'}
         {showInput && (
-          <div className={style.input}>
-            <form onSubmit={onSubmit}>
-              <input
-                type="number"
-                {...register('cardScore', {
-                  maxLength: {
-                    value: 2,
-                    message: 'must be less than 100',
-                  },
-                })}
-              />
-            </form>
-            <div className={style.error}>{errors.cardScore?.message}</div>
-          </div>
+        <form onSubmit={onSubmit} className={style.input}>
+          <input
+            type="number"
+            {...register('cardScore', {
+              maxLength: {
+                value: 2,
+                message: 'must be less than 100',
+              },
+            })}
+          />
+          <div className={style.error}>{errors.cardScore?.message}</div>
+        </form>
         )}
       </div>
 
