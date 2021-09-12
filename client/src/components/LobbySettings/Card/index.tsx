@@ -3,24 +3,31 @@ import { useForm } from 'react-hook-form';
 import style from './index.module.scss';
 
 type CardProps = {
-    edit?: boolean,
-    cardScore: number | null,
-    shortName: string,
+  edit?: boolean,
+  cardScore: number | null,
+  shortName: string,
 }
 type FormData = {
-    'cardScore': number;
+  'cardScore': number;
 }
 
 const Card: FC<CardProps> = ({ edit, cardScore, shortName }) => {
   const [showInput, setShowInput] = useState<boolean>(false);
+  const [isCardSelected, setIsCardSelected] = useState<boolean>(false);
+
   const { handleSubmit, register, formState: { errors } } = useForm();
   const onSubmit = handleSubmit((data: FormData) => {
     console.log(data);
     setShowInput(false);
   });
-
+  // how to deal with edit down here?
+  // in div, so green background is disabled when edit
   return (
-    <div className={style.card}>
+    <div
+      role="none"
+      className={isCardSelected ? style.card_selected : style.card}
+      onClick={() => { setIsCardSelected((prevState: boolean) => !prevState); }}
+    >
       {/*
         if cardScore is number then short name "SP" is rendered, else renders string 'break'.
         if edit is true, that means we are in settings component and we can change value of a card.
