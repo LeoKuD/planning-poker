@@ -1,10 +1,14 @@
-import { uuid } from 'react-uuid';
+export enum UserRole {
+  player = 'player',
+  dealer = 'dealer',
+  observer = 'observer',
+}
 
 export interface User {
-  id: uuid;
+  id: string;
   firstName: string,
   lastName?: string,
-  role: boolean,
+  role: UserRole,
   position?: string,
   avatar?: string
 }

@@ -58,11 +58,12 @@
       }
     }],
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"]
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "import/no-unresolved": "off"
   },
   "settings": {
     "import/resolver": {
-    "typescript": {}
+      "typescript": {}
     },
     "import/ignore": [".css$","node_modules/*"]
   }
