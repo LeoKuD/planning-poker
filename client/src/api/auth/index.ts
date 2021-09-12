@@ -8,8 +8,8 @@ export const getProfile = async (token: string) => {
       method: 'GET',
       url: '/api/profile',
       headers: {
-        Autorization: `Bearer ${token}`
-      }
+        Autorization: `Bearer ${token}`,
+      },
     });
     return res;
   } catch (err) {
