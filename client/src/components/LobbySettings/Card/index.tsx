@@ -20,13 +20,18 @@ const Card: FC<CardProps> = ({ edit, cardScore, shortName }) => {
     console.log(data);
     setShowInput(false);
   });
-  // how to deal with edit down here?
-  // in div, so green background is disabled when edit
+
+  const onCardClickHandler = ():void => {
+    if (edit) {
+      return;
+    } setIsCardSelected((prevState: boolean) => !prevState);
+  };
+
   return (
     <div
       role="none"
       className={isCardSelected ? style.card_selected : style.card}
-      onClick={() => { setIsCardSelected((prevState: boolean) => !prevState); }}
+      onClick={() => { onCardClickHandler(); }}
     >
       {/*
         if cardScore is number then short name "SP" is rendered, else renders string 'break'.
