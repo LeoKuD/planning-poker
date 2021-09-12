@@ -23,14 +23,16 @@ const App: React.FC<Record<string, never>> = () => {
     <>
       <div className="App">
         {!isLoading ? (
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/game" component={Game} />
-            <Route path="/lobby" component={Lobby} />
-            <Route>
-              <Redirect to="/demo" />
-            </Route>
-          </Switch>
+          <>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/game" component={Game} />
+              <Route path="/lobby" component={Lobby} />
+              <Route>
+                <Redirect to="/demo" />
+              </Route>
+            </Switch>
+          </>
         ) : (
           <div
             style={{
