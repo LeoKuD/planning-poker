@@ -1,0 +1,30 @@
+.footer {
+  display: grid;
+  grid-area: footer;
+  background-color: #2b3a67;
+  grid-template: 1fr / minmax(auto, 200px) 1fr minmax(auto, 300px);
+  height: 110px;
+  padding: 0px 15px;
+  align-items: center;
+  color: white;
+}
+.footer ul {
+ list-style: none;
+}
+.footer_links a {
+	color: white;
+}
+@media (max-width: 550px) {
+	.footer {
+	  text-align: center;
+	  grid-template: 1fr minmax(auto, 50px) minmax(auto, 100px) / 1fr;
+	  padding: 10px;
+	}
+	.footer_links ul{
+		padding: 0;
+	}
+	.footer_logo img{
+		max-height: 80px;
+	}
+  }
+
