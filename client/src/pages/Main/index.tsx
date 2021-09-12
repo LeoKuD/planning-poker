@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Layout from '../components/Greetings';
+import Layout from '../../components/Greetings';
 
 const Home: React.FC<HTMLElement> = () => {
   const [welcomeMsg, setWelcomeMsg] = useState<string>('');
