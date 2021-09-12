@@ -32,7 +32,7 @@ const App: React.FC<Record<string, never>> = () => {
               <Route exact path="/" component={Main} />
               <Route path="/game" component={Game} />
               <Route path="/lobby" component={Lobby} />
-              <Route path="/result" component={Results} />
+              <Route path="/results" component={Results} />
               <Route path="*" component={NotFound} />
             </Switch>
           ) : (

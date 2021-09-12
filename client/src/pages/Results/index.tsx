@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Demo: React.FC<HTMLElement> = () => (
+const Results: React.FC<HTMLElement> = () => (
   <h1>
-    Demo page
+    Results page
   </h1>
 );
 
-export default Demo;
+export default Results;
