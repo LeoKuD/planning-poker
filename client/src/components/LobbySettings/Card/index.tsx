@@ -7,6 +7,7 @@ type CardProps = {
   cardScore: number | null,
   shortName: string,
   onClick?: () => void,
+  isCardSelected?: boolean
 }
 
 type FormData = {
@@ -18,9 +19,9 @@ const Card: FC<CardProps> = ({
   cardScore,
   shortName,
   onClick,
+  isCardSelected,
 }) => {
   const [showInput, setShowInput] = useState<boolean>(false);
-  const [isCardSelected, setIsCardSelected] = useState<boolean>(false);
 
   const { handleSubmit, register, formState: { errors } } = useForm();
   const onSubmit = handleSubmit((data: FormData) => {
@@ -28,12 +29,11 @@ const Card: FC<CardProps> = ({
     setShowInput(false);
   });
 
-  const onCardClickHandler = ():void => {
+  const onCardClick = ():void => {
     if (edit) {
       return;
     }
     if (onClick) {
-      setIsCardSelected((prevState: boolean) => !prevState);
       onClick();
       // onClick invokes a function that sends a card which was selected by player.
     }
@@ -43,7 +43,7 @@ const Card: FC<CardProps> = ({
     <div
       role="none"
       className={isCardSelected ? style.card_selected : style.card}
-      onClick={onCardClickHandler}
+      onClick={onCardClick}
     >
       {/*
         if cardScore is number then short name "SP" is rendered, else renders string 'break'.

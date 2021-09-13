@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import plusIcon from 'assets/plus-icon.svg';
 import SectionHeader from '../../SectionHeader';
 import style from './index.module.scss';
@@ -15,17 +15,20 @@ type CardSetProps = {
   edit?: boolean
 }
 
-const onCardClickHandler = (cardId: string): void => {
-  console.log(cardId);
-  // send selected card id (by player in game mode)
-};
-
-const onPlusBtnClick = (): void => {
-  console.log('add card');
-  // add new card (by scram master in edit mode)
-};
-
 const CardSet: FC<CardSetProps> = ({ cards, edit }) => {
+  const [selectedCard, setSelectedCard] = useState<string>('');
+
+  const onCardClick = (cardId: string): void => {
+    setSelectedCard(cardId);
+    console.log(cardId);
+    // set and send selected card id (by player only in game mode)
+  };
+
+  const onPlusBtnClick = (): void => {
+    console.log('add card');
+    // add new card (by scram master only in edit mode)
+  };
+
   if (edit) {
     return (
       <div className={style.cardSet}>
@@ -52,10 +55,11 @@ const CardSet: FC<CardSetProps> = ({ cards, edit }) => {
       <div className={style.cards}>
         {cards.map((card) => (
           <Card
+            isCardSelected={selectedCard === card.id}
             key={card.id}
             cardScore={card.cardScore}
             shortName={card.shortName}
-            onClick={() => { onCardClickHandler(card.id); }}
+            onClick={() => { onCardClick(card.id); }}
           />
         ))}
       </div>
