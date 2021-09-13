@@ -8,7 +8,10 @@ export enum IssuePriority {
   middle = 'middle',
   hight = 'hight',
 }
-
+export enum ButtonTypes {
+  primary = 'primary',
+  secondary = 'secondary',
+}
 export interface User {
   id: string;
   firstName: string,
@@ -55,6 +58,8 @@ export interface roundScore {
 export interface IButton {
   onClick: () => void;
   children: string;
+  disabled?: boolean;
+  type: ButtonTypes;
 }
 
 export interface Game {
