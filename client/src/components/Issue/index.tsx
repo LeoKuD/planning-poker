@@ -3,6 +3,7 @@ import { IssuePriority, Issue, IssueData } from 'types/common-types';
 import imgEdit from 'assets/img/issueEdit.png';
 import imgDel from 'assets/img/issueDel.png';
 import imgDelLobby from 'assets/img/issueDelLobby.png';
+import classNames from 'classnames';
 import styles from './index.module.scss';
 
 export const IssueCard: FC<Issue & IssueData> = ({
@@ -20,12 +21,15 @@ export const IssueCard: FC<Issue & IssueData> = ({
       setCurrent(!current);
     }
   };
-
+  const issueClass = classNames.bind(styles)({
+    [styles.issue]: true,
+    [styles.active]: current,
+  });
   return (
     <article
       onClick={actionIssue}
       onKeyPress={actionIssue}
-      className={current ? styles.issue_activ : styles.issue}
+      className={issueClass}
       role="presentation"
     >
       <div className={styles.text}>
