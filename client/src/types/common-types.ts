@@ -52,6 +52,11 @@ export interface roundScore {
   score: Result
 }
 
+export interface IButton {
+  onClick: () => void;
+  children: string;
+}
+
 export interface Game {
   id: string;
   inviteLink: string;
