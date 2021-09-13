@@ -69,8 +69,9 @@ const Card: FC<CardProps> = ({
       <div className={style.cardScore}>
         {cardScore || 'coffee icon'}
         {showInput && (
-        <form onSubmit={onSubmit} className={style.input}>
+        <form onSubmit={onSubmit}>
           <input
+            className={style.input}
             type="number"
             min="1"
             {...register('cardScore', {
