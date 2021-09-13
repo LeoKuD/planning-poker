@@ -1,0 +1,22 @@
+.avatarContainer {
+  height: 59px;
+  width: 59px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  border-radius: 50%;
+  background-color: #66999b;
+  box-shadow: 0 3px 3px #575555 inset; 
+}
+
+.avatarContainer span {
+  margin: 0;
+}
+
+.small {
+  height: 38px;
+  width: 38px;
+  font-size: 16px;
+}
