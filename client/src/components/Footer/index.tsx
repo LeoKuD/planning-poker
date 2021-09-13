@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
+import logo from 'assets/img/rs_school_js.svg';
 import styles from './index.module.scss';
-import logo from '../../assets/img/rs_school_js.svg';
 
 const Footer: FC = () => {
   const gitHubNames: string[] = ['LeoKuD', 'kastrubait', 'kisaragi99'];

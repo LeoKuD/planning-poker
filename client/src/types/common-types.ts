@@ -34,12 +34,13 @@ export interface Issue {
   id: number;
   title: string;
   link: string;
-  priority: IssuePriority
+  priority: IssuePriority;
 }
 
 export interface IssueData extends Issue {
-  modeEdit: boolean,
-  currentIssueId: number
+  modeMaster? : boolean, // false - player mode, true - master mode
+  masterSettingsMode?: boolean, // false - lobby, true - settings
+  currentIssueId?: number
 }
 
 export interface Result {
