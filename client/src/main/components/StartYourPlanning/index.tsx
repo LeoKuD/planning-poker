@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import logo from 'assets/main-page-logo.svg';
 import style from './index.module.scss';
-import logo from '../../assets/main-page-logo.svg';
 
 type LayoutProps = {
     startNewGame: () => void,
@@ -39,12 +39,15 @@ const Layout: React.FC<LayoutProps> = ({ startNewGame, connect }) => {
                 required: true,
                 pattern: {
                   value: /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm,
-                  message: 'invalid email address',
+                  message: 'Invalid URL!',
                 },
               })}
             />
             <input className={style.submit} type="submit" value="Connect" />
-            <div className={style.error}>{errors.url?.message}</div>
+            <p className={style.error}>
+              {errors.url?.type === 'required' && 'URL is required!'}
+              {errors.url?.message}
+            </p>
           </form>
         </div>
 
