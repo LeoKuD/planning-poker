@@ -1,9 +1,10 @@
 import React, { FC, useState } from 'react';
 import { IssuePriority, Issue, IssueData } from 'types/common-types';
-import imgEdit from 'assets/img/issueEdit.png';
-import imgDel from 'assets/img/issueDel.png';
-import imgDelLobby from 'assets/img/issueDelLobby.png';
 import classNames from 'classnames';
+import CloseIcon from '@material-ui/icons/Close';
+import EditIcon from '@material-ui/icons/Edit';
+import { IconButton } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './index.module.scss';
 
 export const IssueCard: FC<Issue & IssueData> = ({
@@ -26,13 +27,13 @@ export const IssueCard: FC<Issue & IssueData> = ({
     [styles.active]: current,
   });
   return (
-    <article
-      onClick={actionIssue}
-      onKeyPress={actionIssue}
-      className={issueClass}
-      role="presentation"
-    >
-      <div className={styles.text}>
+    <article className={issueClass}>
+      <div
+        onClick={actionIssue}
+        onKeyPress={actionIssue}
+        role="presentation"
+        className={styles.text}
+      >
         <span className={styles.current_issue}>{current && 'CURRENT'}</span>
         <span className={styles.issue_name}>{title}</span>
         <span className={styles.issue_priority}>{priority}</span>
@@ -42,11 +43,17 @@ export const IssueCard: FC<Issue & IssueData> = ({
           <div className={editMode ? styles.master_mode : styles.del_issue}>
             {editMode ? (
               <>
-                <img src={imgEdit} alt="Edit" />
-                <img src={imgDel} alt="DELETE" />
+                <IconButton aria-label="edit">
+                  <EditIcon />
+                </IconButton>
+                <IconButton aria-label="delete" color="secondary">
+                  <DeleteIcon />
+                </IconButton>
               </>
             ) : (
-              <img src={imgDelLobby} alt="DELETE" />
+              <IconButton aria-label="delete">
+                <CloseIcon />
+              </IconButton>
             )}
           </div>
         </div>
