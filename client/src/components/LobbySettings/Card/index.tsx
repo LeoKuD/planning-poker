@@ -6,12 +6,19 @@ type CardProps = {
   edit?: boolean,
   cardScore: number | null,
   shortName: string,
+  onClick?: () => void,
 }
+
 type FormData = {
   'cardScore': number;
 }
 
-const Card: FC<CardProps> = ({ edit, cardScore, shortName }) => {
+const Card: FC<CardProps> = ({
+  edit,
+  cardScore,
+  shortName,
+  onClick,
+}) => {
   const [showInput, setShowInput] = useState<boolean>(false);
   const [isCardSelected, setIsCardSelected] = useState<boolean>(false);
 
@@ -25,7 +32,11 @@ const Card: FC<CardProps> = ({ edit, cardScore, shortName }) => {
     if (edit) {
       return;
     }
-    setIsCardSelected((prevState: boolean) => !prevState);
+    if (onClick) {
+      setIsCardSelected((prevState: boolean) => !prevState);
+      onClick();
+      // onClick invokes a function that sends a card which was selected by player.
+    }
   };
 
   return (
@@ -61,6 +72,7 @@ const Card: FC<CardProps> = ({ edit, cardScore, shortName }) => {
         <form onSubmit={onSubmit} className={style.input}>
           <input
             type="number"
+            min="1"
             {...register('cardScore', {
               maxLength: {
                 value: 2,
