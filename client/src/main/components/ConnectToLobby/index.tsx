@@ -37,8 +37,8 @@ const LoginForm: FC<LoginFormProps> = ({ userImage = tempIcon, closeForm }) => {
 
   const onSubmit = handleSubmit((data: FormData) => {
     console.log(data);
-    history.push('/lobby');
     reset();
+    history.push('/lobby');
   });
 
   const closeFormHandler = (): void => {
