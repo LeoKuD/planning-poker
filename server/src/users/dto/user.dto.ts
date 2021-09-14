@@ -1,5 +1,4 @@
 import { IsString, IsNotEmpty, MinLength } from 'class-validator';
-import { Role } from 'types/common.types';
 
 export class UserDto {
   @IsString()
@@ -11,7 +10,7 @@ export class UserDto {
   surname?: string;
 
   @IsNotEmpty()
-  position: Role.player | Role.dealer | Role.observer;
+  position: 'plyaer' | 'dealer' | 'observer';
 
   @IsString()
   avatarUrl?: string;
