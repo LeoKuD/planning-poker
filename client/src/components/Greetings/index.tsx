@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import logo from 'assets/main-page-logo.svg';
 import style from './index.module.scss';
-import logo from '../../assets/main-page-logo.svg';
 
 type LayoutProps = {
     startNewGame: () => void,

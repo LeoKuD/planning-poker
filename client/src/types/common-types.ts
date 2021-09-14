@@ -8,7 +8,10 @@ export enum IssuePriority {
   middle = 'middle',
   hight = 'hight',
 }
-
+export enum ButtonTypes {
+  primary = 'primary',
+  secondary = 'secondary',
+}
 export interface User {
   id: string;
   firstName: string,
@@ -34,12 +37,13 @@ export interface Issue {
   id: number;
   title: string;
   link: string;
-  priority: IssuePriority
+  priority: IssuePriority;
 }
 
 export interface IssueData extends Issue {
-  modeEdit: boolean,
-  currentIssueId: number
+  modeMaster? : boolean, // false - player mode, true - master mode
+  masterSettingsMode?: boolean, // false - lobby, true - settings
+  currentIssueId?: number
 }
 
 export interface Result {
@@ -49,6 +53,13 @@ export interface Result {
 export interface roundScore {
   numberRound: number;
   score: Result
+}
+
+export interface IButton {
+  onClick: () => void;
+  children: string;
+  disabled?: boolean;
+  type: ButtonTypes;
 }
 
 export interface ITimer {
