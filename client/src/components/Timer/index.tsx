@@ -47,7 +47,7 @@ export const Timer: FC<ITimer> = ({
         <div className={styles.counter}>
           <p>minutes</p>
           {masterMode ? (
-            <input type="text" onChange={(e) => handlerChangeMinutes(e)} value={minutes} />
+            <input type="text" onChange={handlerChangeMinutes} value={minutes} />
           ) : (
             <h1>{minutes}</h1>
           )}
