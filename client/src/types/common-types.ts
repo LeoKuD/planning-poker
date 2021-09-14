@@ -51,6 +51,13 @@ export interface roundScore {
   score: Result
 }
 
+export interface ITimer {
+  min?: number;
+  sec?: number;
+  mode?: boolean; // true - settings , false - game
+  isRunningRound: boolean;
+}
+
 export interface Game {
   id: string;
   inviteLink: string;
