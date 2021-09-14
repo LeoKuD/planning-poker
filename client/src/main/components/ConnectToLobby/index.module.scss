@@ -1,0 +1,29 @@
+.form{
+    display: grid;
+    width: 600px;
+    border-radius: 10px;
+    place-items: center;
+    background-color: white;
+}
+.inputField{
+    width: 250px;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid rgb(53, 53, 180);
+    border-radius: 5px;
+    outline: none;
+}
+.error{
+    color: red;
+    font-size: 12px;
+}
+
+.controls{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    
+    &__submit, button{
+        margin: 10px;
+    }
+}

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Layout from '../../components/Greetings';
+import { useHistory } from 'react-router';
+import StartYourPlanning from '../../main/components/StartYourPlanning';
 
 const Home: React.FC<HTMLElement> = () => {
+  const history = useHistory();
   const [welcomeMsg, setWelcomeMsg] = useState<string>('');
 
   useEffect(() => {
@@ -13,7 +15,7 @@ const Home: React.FC<HTMLElement> = () => {
   }, []);
 
   const startNewGame = (): void => {
-    console.log('start new game');
+    history.push('/lobby');
   };
 
   const connect = (url: string): void => {
@@ -23,7 +25,7 @@ const Home: React.FC<HTMLElement> = () => {
   return (
     <>
       <h2>{welcomeMsg}</h2>
-      <Layout startNewGame={startNewGame} connect={connect} />
+      <StartYourPlanning startNewGame={startNewGame} connect={connect} />
     </>
   );
 };
