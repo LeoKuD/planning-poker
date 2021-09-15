@@ -2,9 +2,8 @@ import React, { FC } from 'react';
 import { UserData } from 'types/common-types';
 import Avatar from 'components/Avatar';
 import classNames from 'classnames';
-// import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Block from '@material-ui/icons/Block';
+import BlockIcon from '@material-ui/icons/Block';
 import style from './index.module.scss';
 
 interface UserProps {
@@ -48,7 +47,7 @@ const User: FC<UserProps> = ({ userData, isSmall }) => {
         <span className={fontClass}>{userName}</span>
         <span>{userData.position}</span>
       </div>
-      {!showDeleteButton && <Block className={classes.closeIcon} onClick={deleteUser} />}
+      {!showDeleteButton && <BlockIcon className={classes.closeIcon} onClick={deleteUser} />}
     </div>
   );
 };
