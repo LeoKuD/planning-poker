@@ -5,7 +5,7 @@ import style from './index.module.scss';
 type CreateEditIssueProps = {
     edit?: boolean,
     title?: string,
-    id?: number,
+    id?: string,
     priority?: string,
 }
 
@@ -17,28 +17,28 @@ enum FormControls {
 
 type FormData = {
     [FormControls.title]: string;
-    [FormControls.id]: number;
+    [FormControls.id]: string;
     [FormControls.priority]: string;
 }
 
 type PriorityItems = {
-    id: number,
+    id: string,
     type: string,
 }
 
 const priorityItems:PriorityItems[] = [{
-  id: 0,
+  id: '0',
   type: 'low',
 }, {
-  id: 1,
+  id: '1',
   type: 'medium',
 }, {
-  id: 2,
+  id: '2',
   type: 'high',
 }];
 
 const CreateEditIssue: FC<CreateEditIssueProps> = ({
-  edit = false, title, id, priority,
+  edit, title, id, priority,
 }) => {
   const {
     register, handleSubmit, setValue, formState: { errors },
@@ -84,8 +84,7 @@ const CreateEditIssue: FC<CreateEditIssueProps> = ({
       <label htmlFor={FormControls.id}>Id:</label>
       <input
         className={style.form__input}
-        type="number"
-        min="0"
+        type="text"
         {...register(FormControls.id, { required: true, disabled: edit })}
       />
       <p className={style.error}>
