@@ -69,6 +69,10 @@ export interface ITimer {
   isRunningRound: boolean;
 }
 
+export interface IRoundControls {
+  isRunning: boolean;
+}
+
 export interface Game {
   id: string;
   inviteLink: string;
