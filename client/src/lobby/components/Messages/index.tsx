@@ -49,7 +49,7 @@ const Messages: FC<MessagesProps> = ({ socket }) => {
           >
             <span className="style.message">{message.value}</span>
             <span className="style.user">
-              <User userData={message.user} />
+              <User userData={message.user} isSmall />
             </span>
           </div>
         ))}
