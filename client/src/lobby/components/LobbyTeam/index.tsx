@@ -14,7 +14,7 @@ const LobbyTeam: FC<TeamProps> = ({ header, members }) => (
     <SectionHeader header={header} />
     <div className={style.lobby__content}>
       {members.map((member: UserData) => (
-        <User userData={member} />
+        <User userData={member} isSmall />
       ))}
     </div>
   </>
