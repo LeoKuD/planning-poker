@@ -1,5 +1,5 @@
 import { Message } from 'react-hook-form';
-import { Issue, roundScore, User } from 'types/common-types';
+import { Issue, RoundScore, User } from 'types/common-types';
 import { MOCK_API } from './mock-api';
 
 export const getLobbyUsers = (sessionId: string): User[] => {
@@ -38,12 +38,13 @@ export const getSessionConfig = (sessionId: string): string => {
   return data.settings;
 };
 
-export const getRoundScore = (sessionId: string, roundId: number): roundScore | undefined => {
+export const getRoundScore = (sessionId: string, issueId: number): RoundScore | undefined => {
   const data = MOCK_API.find((item) => item.id === sessionId);
   if (!data) {
     console.log(`Game with sessionId = ${sessionId} not found`);
-    return {} as roundScore;
+    return {} as RoundScore;
   }
-  const { rounds } = data;
-  return rounds.find((item) => item.numberRound === roundId);
+  const { issues } = data;
+  const currentIssue = issues.find((item) => item.id === issueId);
+  return currentIssue?.roundScore;
 };
