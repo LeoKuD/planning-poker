@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import plusIcon from 'assets/plus-icon.svg';
-import SectionHeader from '../../SectionHeader';
+import SectionHeader from '../SectionHeader';
 import style from './index.module.scss';
 import Card from '../Card';
 
