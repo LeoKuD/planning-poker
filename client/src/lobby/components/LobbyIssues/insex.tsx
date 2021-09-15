@@ -19,11 +19,13 @@ const LobbyIssues: FC<IssuesProps> = ({ header, issues }) => {
     <>
       <SectionHeader header={header} />
       <section className={style.issuesContainer}>
-        <div className={style.issuesList}>
+        <ul className={style.issuesList}>
           {issues.map((issue: IssueData) => (
-            <IssueCard issueData={issue} />
+            <li>
+              <IssueCard issueData={issue} />
+            </li>
           ))}
-        </div>
+        </ul>
         <Button type={ButtonTypes.primary} onClick={createIssue}>
           Create new Issue
           {/* <AddIcon /> */}
