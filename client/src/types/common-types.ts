@@ -62,6 +62,10 @@ export interface IButton {
   type: ButtonTypes;
 }
 
+export interface IRoundControls {
+  isRunning: boolean;
+}
+
 export interface Game {
   id: string;
   inviteLink: string;
