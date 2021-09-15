@@ -50,7 +50,7 @@ export interface Result {
   [cardWeight: string]: number
 }
 
-export interface roundScore {
+export interface RoundScore {
   numberRound: number;
   score: Result
 }
@@ -66,7 +66,6 @@ export interface Game {
   id: string;
   inviteLink: string;
   settings: string; // TODO implement interface
-  rounds: roundScore[];
   issues: Issue[];
   members: UserData[];
   messages: Message[];
