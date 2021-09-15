@@ -62,6 +62,13 @@ export interface IButton {
   type: ButtonTypes;
 }
 
+export interface ITimer {
+  min?: number;
+  sec?: number;
+  mode?: boolean; // true - settings , false - game
+  isRunningRound: boolean;
+}
+
 export interface Game {
   id: string;
   inviteLink: string;
