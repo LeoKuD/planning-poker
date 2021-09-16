@@ -26,10 +26,14 @@ const SessionScore: FC<SessionScoreProps> = ({ sessionId }) => {
 
   return (
     <div className={style.scoreContent}>
+      <div className={style.scoreHeader}>
+        <span className={style.score}>Score:</span>
+        <span className={style.players}>Players:</span>
+      </div>
       <ul>
         {testData.map((item: SessionScoreData) => (
           <li className={style.scoreContent}>
-            <span className={style.score}>
+            <span className={style.scoreResult}>
               {!item.value ? 'In progress' : item.value}
             </span>
             <User userData={userById(item.userId) as UserData} isSmall />
