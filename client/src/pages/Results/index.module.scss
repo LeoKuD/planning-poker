@@ -1,0 +1,8 @@
+li.resultRound {
+  height: auto;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 8fr;
+  grid-row-gap: 8px;
+}
