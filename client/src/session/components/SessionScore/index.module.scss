@@ -1,0 +1,18 @@
+.score {
+  width: 9em;
+  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid;
+
+}
+
+li.scoreContent {
+  height: 3.625em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0.5em;
+}
