@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { Switch } from '@material-ui/core';
+import { Timer } from 'components/Timer';
+import CardSet from 'components/CardSet';
 import style from './index.module.scss';
 
 enum FormControls {
@@ -24,6 +26,22 @@ type FormData = {
 type SettingsFormProps = {
 
 }
+
+const cards = [{
+  id: '0',
+  cardScore: null,
+  shortName: 'br',
+},
+{
+  id: '1',
+  cardScore: 1,
+  shortName: 'SP',
+},
+{
+  id: '2',
+  cardScore: 2,
+  shortName: 'SP',
+}];
 
 const SettingsForm: FC = () => {
   const {
@@ -84,11 +102,12 @@ const SettingsForm: FC = () => {
           />
           <div className={style.error}>{errors.shortScoreType?.message}</div>
         </div>
-        {timerNeeded && <div>Timer: 02.00 ( Component )</div>}
+        {timerNeeded && <Timer isRunningRound />}
 
         <input className={style.submit} type="submit" value="Temp confirm" />
 
       </form>
+      <CardSet cards={cards} edit />
     </div>
   );
 };
