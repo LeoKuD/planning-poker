@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
-import StartYourPlanning from '../../main/components/StartYourPlanning';
+import StartYourPlanning from '../components/StartYourPlanning';
 
 const Home: React.FC<HTMLElement> = () => {
   const history = useHistory();
