@@ -21,7 +21,7 @@ const LobbyIssues: FC<IssuesProps> = ({ header, issues }) => {
       <section className={style.issuesContainer}>
         <ul className={style.issuesList}>
           {issues.map((issue: IssueData) => (
-            <li>
+            <li className={style.issueItem}>
               <IssueCard issueData={issue} />
             </li>
           ))}
