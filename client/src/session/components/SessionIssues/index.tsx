@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
 import SectionHeader from 'components/SectionHeader';
 import { IssueCard } from 'components/Issue';
-import { IssueData, ButtonTypes } from 'types/common-types';
+import { IssueData, ButtonTypes, RoundScore } from 'types/common-types';
 import IssueInfo from 'components/IssueInfo';
 import { Button } from 'components/Button';
+import RoundStatistics from 'results/components/RoundStatistics';
+import { getRoundScore } from 'api/mock-api.service';
 import styles from './index.module.scss';
 
 type SessionIssuesProps = {
@@ -12,16 +14,15 @@ type SessionIssuesProps = {
 }
 
 const SessionIssues: FC<SessionIssuesProps> = ({ issues, modeMaster }) => {
-  if (modeMaster) {
-    // add create new issue button
-  }
+  const sessionId = 'IU43E';
+
   const addNewIssue = (): void => {
     console.log('new issue added');
   };
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.container__issues}>
         <SectionHeader header="Session Issues" />
         {issues.map((issue) => (
           <IssueCard
@@ -29,11 +30,21 @@ const SessionIssues: FC<SessionIssuesProps> = ({ issues, modeMaster }) => {
             modeMaster={modeMaster}
           />
         ))}
+        {modeMaster && (
         <Button onClick={addNewIssue} type={ButtonTypes.primary}>
           Create new issue
         </Button>
+        )}
       </div>
-      <IssueInfo />
+
+      <div className={styles.container__issueInfo}>
+        <IssueInfo />
+      </div>
+
+      <div className={styles.container__statistics}>
+        <SectionHeader header="Statistics:" />
+        <RoundStatistics roundData={getRoundScore(sessionId, issues[0].id) as RoundScore} />
+      </div>
     </div>
   );
 };

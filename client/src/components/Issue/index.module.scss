@@ -49,3 +49,20 @@
 .issue_img {
     width: 100%;
 }
+
+
+@media (max-width: 1000px) {
+  .issue {
+    width: 150px;
+    height: 45px;
+    font-size: 12px;
+  }
+
+  .issue_name {
+    font-size: 16px;
+  }
+
+  .issue_priority {
+    font-size: 10px;
+  }
+  }
