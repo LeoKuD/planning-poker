@@ -5,7 +5,7 @@ import MessageInput from '../MessageInput';
 import Messages from '../Messages';
 
 interface ChatProps {
-  socket: Socket
+  socket?: Socket
 }
 
 const LobbyChat: FC<ChatProps> = ({ socket }) => (
