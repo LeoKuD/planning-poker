@@ -1,6 +1,6 @@
 import { getLobbyIssues, getLobbyUsers } from 'api/mock-api.service';
 import LobbyChat from 'lobby/components/LobbyChat';
-import LobbyIssues from 'lobby/components/LobbyIssues/insex';
+import LobbyIssues from 'lobby/components/LobbyIssues';
 import LobbyTeam from 'lobby/components/LobbyTeam';
 import React from 'react';
 // import Modal from 'components/Modal';
