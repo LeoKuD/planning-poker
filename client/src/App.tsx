@@ -4,10 +4,10 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import NotFound from 'components/NotFound';
-import Results from 'pages/Results';
-import Lobby from 'pages/Lobby';
-import Game from 'pages/Game';
-import Main from 'pages/Main';
+import Results from 'results/ResultsPage';
+import Lobby from 'lobby/LobbyPage';
+import Game from 'session/SessionPage';
+import Main from 'main/MainPage';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import { getProfile } from './redux/actions/auth/actions';
