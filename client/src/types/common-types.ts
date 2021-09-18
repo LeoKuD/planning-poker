@@ -14,23 +14,27 @@ export enum ButtonTypes {
 }
 export interface User {
   id: string;
-  firstName: string,
-  lastName?: string,
-  role: UserRole,
-  position?: string,
+  firstName: string;
+  lastName?: string;
+  role: UserRole;
+  position?: string;
   avatar?: string
 }
 
 export interface UserData extends User {
-  isYou?: boolean,
-  showDeleteButton?: boolean,
+  isYou?: boolean;
+  showDeleteButton?: boolean
 }
 
 export interface Message {
   id: number;
-  value: string;
-  user: User;
-  time: Date
+  content: string;
+  author: string;
+  time?: Date
+}
+
+export interface IMessages {
+  [messageId: number]: Message
 }
 
 export interface Issue {
@@ -41,8 +45,8 @@ export interface Issue {
 }
 
 export interface IssueData extends Issue {
-  modeMaster? : boolean, // false - player mode, true - master mode
-  masterSettingsMode?: boolean, // false - lobby, true - settings
+  modeMaster? : boolean; // false - player mode, true - master mode
+  masterSettingsMode?: boolean; // false - lobby, true - settings
   currentIssueId?: number
 }
 

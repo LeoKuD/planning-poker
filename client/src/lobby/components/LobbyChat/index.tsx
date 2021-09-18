@@ -1,8 +1,8 @@
 import { Socket } from 'socket.io-client';
 import React, { FC } from 'react';
+import Messages from 'lobby/components/Messages';
+import NewMessage from 'lobby/components/MessageInput';
 import style from './index.module.scss';
-import MessageInput from '../MessageInput';
-import Messages from '../Messages';
 
 interface ChatProps {
   socket?: Socket
@@ -14,7 +14,7 @@ const LobbyChat: FC<ChatProps> = ({ socket }) => (
       { socket ? (
         <div className="style.chat__content">
           <Messages socket={socket} />
-          <MessageInput socket={socket} />
+          <NewMessage socket={socket} />
         </div>
       ) : (
         <div>Not Connected</div>
