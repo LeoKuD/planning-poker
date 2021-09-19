@@ -109,6 +109,23 @@ export const MOCK_API = [
         position: 'developer',
       },
     ],
+    cards: [
+      {
+        id: 0,
+        cardScore: 2,
+        shortName: 'SP',
+      },
+      {
+        id: 1,
+        cardScore: 4,
+        shortName: 'SP',
+      },
+      {
+        id: 2,
+        cardScore: 6,
+        shortName: 'SP',
+      },
+    ],
     messages: [],
     resultGame: {
       sp1: 0,

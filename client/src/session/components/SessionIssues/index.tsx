@@ -9,9 +9,9 @@ import { getRoundScore } from 'api/mock-api.service';
 import styles from './index.module.scss';
 
 type SessionIssuesProps = {
-  issues: IssueData[],
-  modeMaster? : boolean, // false - player mode, true - master mode
-}
+  issues: IssueData[];
+  modeMaster: boolean; // false - player mode, true - master mode
+};
 
 const SessionIssues: FC<SessionIssuesProps> = ({ issues, modeMaster }) => {
   const sessionId = 'IU43E';
@@ -25,20 +25,17 @@ const SessionIssues: FC<SessionIssuesProps> = ({ issues, modeMaster }) => {
       <div className={styles.container__issues}>
         <SectionHeader header="Session Issues" />
         {issues.map((issue) => (
-          <IssueCard
-            issueData={issue}
-            modeMaster={modeMaster}
-          />
+          <IssueCard issueData={issue} modeMaster={modeMaster} />
         ))}
         {modeMaster && (
-        <Button onClick={addNewIssue} type={ButtonTypes.primary}>
-          Create new issue
-        </Button>
+          <Button onClick={addNewIssue} type={ButtonTypes.primary}>
+            Create new issue
+          </Button>
         )}
       </div>
 
       <div className={styles.container__issueInfo}>
-        <IssueInfo />
+        <IssueInfo modMaster={modeMaster} />
       </div>
 
       <div className={styles.container__statistics}>
