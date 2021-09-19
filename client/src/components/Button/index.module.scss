@@ -1,5 +1,6 @@
 .button {
-    width: 190px;
+    min-width: 190px;
+    width: fit-content;
     height: 50px;
     font-size: 24px;
     background-color: white;
@@ -11,4 +12,14 @@
 .primary{
     background-color: white;
     color: black;
+}
+@media (max-width: 1000px) {
+
+    .button {
+        min-width: 120px;
+        width: fit-content;
+        height: 40px;
+        font-size: 16px;
+    }
+
 }

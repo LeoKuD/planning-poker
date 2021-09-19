@@ -1,0 +1,20 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: auto;
+  
+  &__timer{
+    margin-bottom: 30px;
+  }
+  
+  &__controls{
+  }
+
+}
+
+@media (max-width: 1000px) {
+  .container{
+    width: 270px;
+  }
+}

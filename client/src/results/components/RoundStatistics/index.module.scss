@@ -1,10 +1,10 @@
-
-ul.resultsContent {
- width: 80%;
+.resultsContent{
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 li  {
-  width: 160px;
   display: inline-grid;
   grid-template-columns: 1fr;
   grid-template-rows: 5fr 1fr;
@@ -14,4 +14,17 @@ div.cardScore {
   height: 30px;
   font-size: 24px;
   font-weight: bold;
+}
+
+
+@media (max-width: 1000px) {
+  .resultsContent {
+
+   }
+   
+   div.cardScore {
+     height: 22px;
+     font-size: 16px;
+   }
+   
 }

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { IssueData } from 'types/common-types';
+import { Issue } from 'types/common-types';
 import classNames from 'classnames';
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
@@ -8,11 +8,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './index.module.scss';
 
 interface IssueProps {
-  issueData: IssueData,
+  issueData: Issue,
+  modeMaster?: boolean,
+  masterSettingsMode?: boolean,
 }
 
 export const IssueCard: FC<IssueProps> = ({
   issueData,
+  modeMaster,
+  masterSettingsMode,
   // id = Date.now(),
   // title = 'Title',
   // link = 'http',
@@ -21,7 +25,7 @@ export const IssueCard: FC<IssueProps> = ({
   // masterSettingsMode = false,
 }) => {
   const {
-    title, priority, modeMaster, masterSettingsMode,
+    title, priority,
   } = issueData;
   const [current, setCurrent] = useState(false);
   const [editMode, setMode] = useState(masterSettingsMode);
