@@ -4,7 +4,7 @@
     grid-template-rows: auto 1fr;
     grid-template-areas: "issues info"
                          "statistics statistics ";
-    height: calc(100vh - 181px);
+    // height: calc(100vh - 181px);
     
     &__issues{
         height: fit-content;
@@ -13,7 +13,7 @@
     }
 
     &__issueInfo{
-        width: 500px;
+        // width: 500px;
         height: 140px;
         margin-top: 50px;
         margin-left: 50px;

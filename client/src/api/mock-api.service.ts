@@ -65,3 +65,11 @@ export const getRoundScore = (sessionId: string, issueId: number): RoundScore | 
   const currentIssue = issues.find((item) => item.id === issueId);
   return currentIssue?.roundScore;
 };
+export const getCards = (sessionId: string): any[] => {
+  const data = MOCK_API.find((item) => item.id === sessionId);
+  if (!data) {
+    console.log(`Game with sessionId = ${sessionId} not found`);
+    return [];
+  }
+  return data.cards;
+};
