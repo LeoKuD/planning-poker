@@ -1,17 +1,21 @@
 import { IsString, IsNotEmpty, MinLength } from 'class-validator';
+import { TypePosition } from 'types/common.types';
 
 export class UserDto {
   @IsString()
   @MinLength(5)
   @IsNotEmpty()
-  name: string;
+  firstName: string;
 
   @IsString()
-  surname?: string;
+  lastName?: string;
 
   @IsNotEmpty()
-  position: 'plyaer' | 'dealer' | 'observer';
+  role: TypePosition;
 
   @IsString()
-  avatarUrl?: string;
+  position?: string;
+
+  @IsString()
+  avatar?: string;
 }

@@ -5,3 +5,10 @@ export enum Role {
 }
 
 export type TypePosition = Role.player | Role.dealer | Role.observer;
+
+export interface Message {
+    id: number;
+    value: string;
+    userId: string | null;
+    time?: Date
+  }
