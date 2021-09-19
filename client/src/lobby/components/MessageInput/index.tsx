@@ -10,7 +10,11 @@ const NewMessage: FC<NewMessageProps> = ({ socket }) => {
 
   const submitForm = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    socket.emit('message', value);
+    socket.emit('send_message', {
+      id: 1 + Math.random() * 9999,
+      value,
+      userId: null,
+    });
     setValue('');
   };
 
