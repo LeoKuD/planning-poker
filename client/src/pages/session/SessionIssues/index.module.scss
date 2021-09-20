@@ -1,0 +1,37 @@
+.container{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "issues info"
+                         "statistics statistics ";
+    // height: calc(100vh - 181px);
+    
+    &__issues{
+        height: fit-content;
+        width: fit-content;
+        grid-area: issues;
+    }
+
+    &__issueInfo{
+        // width: 500px;
+        height: 140px;
+        margin-top: 50px;
+        margin-left: 50px;
+        grid-area: info;
+    }
+
+    &__statistics{
+        grid-area: statistics;
+    }
+}
+
+
+
+@media (max-width: 1000px) {
+    .container{
+        &__statistics{
+            width: 500px;
+            grid-area: statistics;
+        }
+    }
+}

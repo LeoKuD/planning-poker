@@ -1,0 +1,10 @@
+.lobby__content { 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 19.625em);
+  grid-gap: 0.5vw;
+  grid-auto-flow: dense;
+}
+
+.lobby__content > div {
+  padding: 0.5em;
+}

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { UserData } from 'types/common-types';
+import { UserData, UserRole } from 'types/index';
 import Avatar from 'components/Avatar';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,7 +14,7 @@ interface UserProps {
 const User: FC<UserProps> = ({ userData, isSmall }) => {
   const userName = ` ${userData.firstName} ${userData.lastName}`;
   const isYou = true;
-  const showDeleteButton = isYou && userData.role === 'dealer';
+  const showDeleteButton = isYou && userData.role === UserRole.dealer;
   const isYouText = 'IT\'S YOU';
   const userClass = classNames({
     [style.userContainer]: true,
@@ -40,7 +40,7 @@ const User: FC<UserProps> = ({ userData, isSmall }) => {
     <div className={userClass}>
       <Avatar
         userData={userData}
-        isSmall
+        isSmall={isSmall}
       />
       <div className={style.nameContainer}>
         {isYou && <span><strong>{isYouText}</strong></span>}

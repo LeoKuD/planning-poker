@@ -1,0 +1,15 @@
+div.header {
+  display: flex;
+  width: auto;
+  height: 3em;
+  align-items: center;
+  justify-content: center;
+  line-height: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  h4 { margin: 0 }
+}
+.issueIdInput {
+  color: #000;
+}

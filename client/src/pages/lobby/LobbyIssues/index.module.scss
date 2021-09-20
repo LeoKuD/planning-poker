@@ -1,0 +1,21 @@
+.issuesContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  grid-gap: 0.5vw;
+  grid-auto-flow: dense;
+}
+
+li {
+  list-style-type: none;
+  .issueItem {
+   
+  }
+}
+  
+ul.issuesList {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 0.5vw;
+  grid-auto-flow: dense;
+}

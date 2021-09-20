@@ -4,13 +4,13 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import NotFound from 'components/NotFound';
-import Results from 'results/ResultsPage';
-import Lobby from 'lobby/LobbyPage';
-import Game from 'session/SessionPage';
-import Main from 'main/MainPage';
+import Results from 'pages/results';
+import Lobby from 'pages/lobby';
+import Game from 'pages/session';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import { getProfile } from './redux/actions/auth/actions';
+import Home from 'pages/home';
+import { getProfile } from './store/actions/auth/actions';
 
 import './App.scss';
 
@@ -30,7 +30,7 @@ const App: React.FC<Record<string, never>> = () => {
         <section className="app-content">
           {!isLoading ? (
             <Switch>
-              <Route exact path="/" component={Main} />
+              <Route exact path="/" component={Home} />
               <Route path="/game" component={Game} />
               <Route path="/lobby" component={Lobby} />
               <Route path="/results" component={Results} />

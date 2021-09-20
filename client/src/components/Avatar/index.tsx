@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { UserData } from 'types/common-types';
+import { UserData } from 'types/index';
 import classNames from 'classnames';
 import style from './index.module.scss';
 

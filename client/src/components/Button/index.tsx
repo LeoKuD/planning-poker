@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import classNames from 'classnames/bind';
-import { IButton } from 'types/common-types';
+import { IButton } from 'types/index';
 import styles from './index.module.scss';
 
 const cx = classNames.bind(styles);
 
-export const Button: FC<IButton> = ({
+const Button: FC<IButton> = ({
   onClick,
   children,
   disabled,
@@ -26,3 +26,5 @@ export const Button: FC<IButton> = ({
     </button>
   );
 };
+
+export default Button;

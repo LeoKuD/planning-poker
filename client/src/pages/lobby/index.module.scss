@@ -1,0 +1,13 @@
+main {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  grid-template-rows: 1fr;
+  section.content {
+    height: auto;
+  }
+  aside.content {
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+}

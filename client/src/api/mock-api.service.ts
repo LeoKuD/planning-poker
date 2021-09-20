@@ -1,14 +1,31 @@
 import { Message } from 'react-hook-form';
-import { Issue, RoundScore, User } from 'types/common-types';
+import {
+  Issue, RoundScore, User, UserRole,
+} from 'types/index';
 import { MOCK_API } from './mock-api';
 
-export const getLobbyUsers = (sessionId: string): User[] => {
+export const getAllUsers = (sessionId: string): User[] => {
   const data = MOCK_API.find((item) => item.id === sessionId);
   if (!data) {
     console.log(`Game with sessionId = ${sessionId} not found`);
     return [];
   }
   return data.members;
+};
+
+export const getLobbyUsers = (sessionId: string): User[] => {
+  const members = getAllUsers(sessionId);
+  return members.filter((item) => item.role !== UserRole.dealer);
+};
+
+export const getSessionOwner = (sessionId: string): User => {
+  const members = getAllUsers(sessionId);
+  const owner = members.find((item) => item.role === UserRole.dealer);
+  if (!owner) {
+    console.log(`Owner for sessionId = ${sessionId} not found`);
+    return {} as User;
+  }
+  return owner;
 };
 
 export const getLobbyIssues = (sessionId: string): Issue[] => {
@@ -47,4 +64,12 @@ export const getRoundScore = (sessionId: string, issueId: number): RoundScore | 
   const { issues } = data;
   const currentIssue = issues.find((item) => item.id === issueId);
   return currentIssue?.roundScore;
+};
+export const getCards = (sessionId: string): any[] => {
+  const data = MOCK_API.find((item) => item.id === sessionId);
+  if (!data) {
+    console.log(`Game with sessionId = ${sessionId} not found`);
+    return [];
+  }
+  return data.cards;
 };
