@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Timer } from 'components/Timer';
-import { RoundControls } from 'components/RoundControls';
+import Timer from 'components/Timer';
+import RoundControls from 'components/RoundControls';
 import style from './index.module.scss';
 
 type IssueInfoProps = {

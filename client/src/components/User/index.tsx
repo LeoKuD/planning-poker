@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { UserData, UserRole } from 'types/common-types';
+import { UserData, UserRole } from 'types/index';
 import Avatar from 'components/Avatar';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';

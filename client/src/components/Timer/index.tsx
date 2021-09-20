@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
-import { ITimer } from 'types/common-types';
+import { ITimer } from 'types/index';
 import styles from './index.module.scss';
 
-export const Timer: FC<ITimer> = ({
+const Timer: FC<ITimer> = ({
   min = 0,
   sec = 30,
   mode = false,
@@ -64,3 +64,5 @@ export const Timer: FC<ITimer> = ({
     </article>
   );
 };
+
+export default Timer;

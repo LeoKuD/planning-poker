@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
-import plusIcon from 'assets/plus-icon.svg';
-import SectionHeader from '../SectionHeader';
+import plusIcon from 'assets/icons/plus-icon.svg';
+import SectionHeader from 'components/SectionHeader';
+import Card from 'components/Card';
 import style from './index.module.scss';
-import Card from '../Card';
 
 type Cards = {
   id: string,

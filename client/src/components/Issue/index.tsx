@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Issue } from 'types/common-types';
+import { Issue } from 'types/index';
 import classNames from 'classnames';
 import CloseIcon from '@material-ui/icons/Close';
 import EditIcon from '@material-ui/icons/Edit';
@@ -13,7 +13,7 @@ interface IssueProps {
   masterSettingsMode?: boolean,
 }
 
-export const IssueCard: FC<IssueProps> = ({
+const IssueCard: FC<IssueProps> = ({
   issueData,
   modeMaster,
   masterSettingsMode,
@@ -73,3 +73,5 @@ export const IssueCard: FC<IssueProps> = ({
     </article>
   );
 };
+
+export default IssueCard;

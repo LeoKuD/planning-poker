@@ -1,7 +1,7 @@
 import { Message } from 'react-hook-form';
 import {
   Issue, RoundScore, User, UserRole,
-} from 'types/common-types';
+} from 'types/index';
 import { MOCK_API } from './mock-api';
 
 export const getAllUsers = (sessionId: string): User[] => {
