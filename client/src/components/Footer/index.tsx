@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import logo from 'assets/img/rs_school_js.svg';
+import logo from 'assets/images/rs_school_js.svg';
 import styles from './index.module.scss';
 
 const Footer: FC = () => {

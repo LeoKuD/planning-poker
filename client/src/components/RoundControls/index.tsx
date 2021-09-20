@@ -1,9 +1,9 @@
-import { Button } from 'components/Button';
+import Button from 'components/Button';
 import React, { FC } from 'react';
-import { ButtonTypes, IRoundControls } from 'types/common-types';
+import { ButtonTypes, IRoundControls } from 'types/index';
 import styles from './index.module.scss';
 
-export const RoundControls: FC<IRoundControls> = ({ isRunning }) => (
+const RoundControls: FC<IRoundControls> = ({ isRunning }) => (
   <article className={styles.roundControls}>
     {isRunning ? (
       <Button
@@ -30,3 +30,5 @@ export const RoundControls: FC<IRoundControls> = ({ isRunning }) => (
     )}
   </article>
 );
+
+export default RoundControls;

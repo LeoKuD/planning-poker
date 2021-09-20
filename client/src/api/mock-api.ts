@@ -1,4 +1,4 @@
-import { IssuePriority, UserRole } from 'types/common-types';
+import { IssuePriority, UserRole } from 'types/index';
 
 export const MOCK_API = [
   {
