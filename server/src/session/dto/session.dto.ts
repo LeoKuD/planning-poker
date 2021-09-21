@@ -1,11 +1,7 @@
 import { IsString, IsNotEmpty, MinLength } from 'class-validator';
 import { UserEntity } from 'users/entities/user.entity';
 
-export class GameDto {
-  @IsString()
-  @IsNotEmpty()
-  id: string;
-
+export class SessionDto {
   @IsString()
   @IsNotEmpty()
   inviteLink: string;
@@ -15,13 +11,13 @@ export class GameDto {
   title: string;
 
   @IsString()
-  descriptions: string;
+  descriptions?: string;
 
-  members: UserEntity[];
+  members?: UserEntity[];
   
   @IsString()
-  settings: string;
+  settings?: string;
 
   @IsString()
-  result: string;
+  result?: string;
 }

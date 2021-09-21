@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { InMemoryDBModule } from '@nestjs-addons/in-memory-db';
-import { GameController } from './game.controller';
+import { GameController } from './session.controller';
 
 @Module({
     imports: [InMemoryDBModule.forFeature('games')],

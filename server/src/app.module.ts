@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ChatGateway } from 'chat/chat.gateway';
 import { ChatService } from 'chat/chat.service';
 import { CoreModule } from 'core/core.module';
-import { GameModule } from 'games/game.module';
+import { GameModule } from 'session/session.module';
 import { UserModule } from './users/user.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { AvatarModule } from './avatar/avatar.module';
