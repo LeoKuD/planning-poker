@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { InMemoryDBModule } from '@nestjs-addons/in-memory-db';
-import { GameController } from './session.controller';
+import { SessionController } from './session.controller';
 
 @Module({
-    imports: [InMemoryDBModule.forFeature('games')],
-    controllers: [GameController]
+    imports: [InMemoryDBModule.forFeature('sessions')],
+    controllers: [SessionController]
 })
-export class GameModule {}
+export class SessionModule {}

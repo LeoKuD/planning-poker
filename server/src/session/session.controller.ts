@@ -12,7 +12,7 @@ import { SessionEntity } from './entities/session.entity';
 import { SessionDto } from './dto/session.dto';
 
 @Controller('sessions')
-export class GameController extends InMemoryDBEntityAsyncController<SessionEntity> {
+export class SessionController extends InMemoryDBEntityAsyncController<SessionEntity> {
     constructor(private gameService: InMemoryDBService<SessionEntity>) {
         super(gameService);
     }

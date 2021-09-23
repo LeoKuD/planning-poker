@@ -1,23 +1,22 @@
-import { IsString, IsNotEmpty, MinLength } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 import { UserEntity } from 'users/entities/user.entity';
 
 export class SessionDto {
+  @IsString()
+  @IsNotEmpty()
+  id: string;
+
   @IsString()
   @IsNotEmpty()
   inviteLink: string;
 
   @IsString()
   @IsNotEmpty()
-  title: string;
+  sessionTitle: string;
 
   @IsString()
-  descriptions?: string;
+  @IsNotEmpty()
+  sessionDealerId: string;
 
   members?: UserEntity[];
-  
-  @IsString()
-  settings?: string;
-
-  @IsString()
-  result?: string;
 }
