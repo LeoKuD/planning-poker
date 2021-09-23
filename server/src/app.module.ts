@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ChatGateway } from 'chat/chat.gateway';
-import { ChatService } from 'chat/chat.service';
+import { SessionGateway } from 'services/session.gateway';
+import { SessionService } from 'session/session.service';
 import { CoreModule } from 'core/core.module';
-import { GameModule } from 'session/session.module';
+import { SessionModule } from 'session/session.module';
 import { UserModule } from './users/user.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { AvatarModule } from './avatar/avatar.module';
@@ -15,15 +15,15 @@ import { AvatarModule } from './avatar/avatar.module';
       dest: './uploads',
     }),
     UserModule, 
-    GameModule, 
+    SessionModule, 
     CoreModule, 
     AvatarModule,
   ],
   controllers: [AppController],
   providers: [
     AppService, 
-    ChatGateway, 
-    ChatService
+    SessionGateway, 
+    SessionService
   ],
 })
 export class AppModule {}
