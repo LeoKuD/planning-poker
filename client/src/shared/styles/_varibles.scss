@@ -1,0 +1,39 @@
+//WIDTH
+$screen-sm: 1024px;
+$page-width: 80%;
+$page-height: calc(100vh - 179px);
+
+//COLORS
+$color-black:#000;
+$color-white:#FFF;
+$color-success:#00BF32;
+$color-error:#FF1E00;
+
+$color-space-cadet: rgba(43, 58, 103, 1);
+$color-dark-blue: rgba(73, 106, 129, 1);
+$color-cadet-blue: rgba(102, 153, 155, 1);
+$color-base-sage: rgba(179, 175, 143, 1);
+$color-melloy-apricot: rgba(255, 196, 130, 1);
+
+
+//BORDERS
+$border-style: solid;
+$border-width: 1px;
+$border-radius-s: 3px;
+$border-radius-m: 5px;
+$border-radius-l: 7px;
+
+//SPACING
+$margin-xs: 5px;
+$margin-s: 10px;
+$margin-m: 20px;
+$margin-l: 30px;
+$margin-xl: 50px;
+
+$padding-s: $margin-s $margin-s+5;
+$padding-m: $margin-m;
+$padding-l: $margin-m+10px $margin-l;
+
+//SHADOWS
+$shadow-a: 0 3px 3px #808080;
+$shadow-b: 1px 2px 3px 2px rgba(0,0,0,0.21);
