@@ -38,6 +38,32 @@ export const appReducer = (state = initialState, action: Action): any => {
         team: action.payload.team,
         isAdmin: true,
       };
+    case types.SET_SESSION_VALID:
+      return {
+        ...state,
+        isSessionValid: action.payload,
+      };
+    case types.SET_CONNECTION: {
+      return {
+        ...state,
+        lobbyId: action.payload.sessionId,
+        userId: action.payload.sessionDealerId,
+        team: action.payload.team,
+        isAdmin: false,
+      };
+    }
+    case types.ADD_NEW_USER: {
+      return {
+        ...state,
+        team: [...state.team, action.payload],
+      };
+    }
+    case types.START_SESSION: {
+      return {
+        ...state,
+        sessionSettings: action.payload,
+      };
+    }
     default:
       return state;
   }

@@ -5,7 +5,7 @@ import {
   setConnectionAC,
   setSessionValidAC,
   startSessionAC,
-} from 'store/actions/auth/actions';
+} from 'store/actions/app/actions';
 
 export const createLobbyAPI: any = (socket: Socket, dispatch: any) => {
   socket.on('session:created', (session) => {

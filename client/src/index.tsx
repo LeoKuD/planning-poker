@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { socket, SocketContext } from 'context/socket';
+import { socket, SocketContext } from 'utils/socketContext';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
