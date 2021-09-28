@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { socket, SocketContext } from 'context/socket';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
@@ -10,9 +11,11 @@ import store from './store';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <SocketContext.Provider value={socket}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </SocketContext.Provider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
