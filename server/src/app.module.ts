@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SessionGateway } from 'services/session.gateway';
-import { SessionService } from 'session/session.service';
 import { CoreModule } from 'core/core.module';
 import { SessionModule } from 'session/session.module';
 import { UserModule } from './users/user.module';
@@ -22,8 +21,7 @@ import { AvatarModule } from './avatar/avatar.module';
   controllers: [AppController],
   providers: [
     AppService, 
-    SessionGateway, 
-    SessionService
+    SessionGateway
   ],
 })
 export class AppModule {}
