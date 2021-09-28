@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
 // import { InMemoryDBService } from '@nestjs-addons/in-memory-db';
 // import { WsException } from '@nestjs/websockets';
-import { SessionEntity } from 'session/entities/session.entity';
+import { SessionEntity } from 'sessions/entities/session.entity';
 import { generateId } from 'utils/generate-id.utils';
 import { UserEntity } from 'users/entities/user.entity';
  
 @Injectable()
 export class SessionService {
-  // constructor(
-  //   private readonly sessionService: InMemoryDBService<SessionEntity>,
-  // ) {}
- 
   private sessions: Map<string, SessionEntity> = new Map();
 
   private getSessionId(): string {
@@ -23,16 +19,10 @@ export class SessionService {
     return sessionId;
   }
 
-  createSession(): SessionEntity {
+  createSession(data): SessionEntity {
     const sessionId = this.getSessionId();
 
-    const session = {
-      id: sessionId,
-      inviteLink: `URL/lobby/${sessionId}`,
-      sessionTitle: '',
-      sessionDealerId: null,
-      members: [],
-    };
+    const session = { ...data, id: sessionId, inviteLink: `/lobby/${sessionId}` }
 
     this.sessions.set(sessionId, session);
 
@@ -55,7 +45,7 @@ export class SessionService {
     const session = this.getSessionById(sessionId);
 
     session.members.push(user);
-    if (user.id) {
+    if (user.isAdmin) {
       session.sessionDealerId = user.id;
     }
   }
