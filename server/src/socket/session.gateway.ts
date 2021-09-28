@@ -17,6 +17,9 @@ import { SessionService } from 'sessions/session.service';
 import { UserService } from 'users/user.service';
 import { UserEntity } from 'users/entities/user.entity';
 import { SessionEntity } from 'sessions/entities/session.entity';
+import { IssueEntity } from 'issues/entities/issue.entity';
+import { IssueService } from 'issues/issue.service';
+import { IssueDto } from 'issues/dto/issue.dto';
    
 @WebSocketGateway({ cors: true })
 export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -25,7 +28,8 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
    
   constructor(
     private readonly sessionService: SessionService,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly issueService: IssueService
   ) {}
   
   private logger: Logger = new Logger('SocketGateway');
@@ -95,7 +99,48 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
       this.server.to(userId).emit('session:exit', session);
     }
 
+    @SubscribeMessage('session:issue:getAll')
+    async onSessionIssueGetAll(
+      @MessageBody() sessionId: string,
+      @ConnectedSocket() client: Socket,
+    ) {
+      const userId = client.id;
+      const issues = this.issueService.getAllIssue(sessionId);
+      this.server.to(userId).emit('session:issue:getAll', issues);
+    }
 
+    @SubscribeMessage('session:issue:add')
+    async onSessionIssueAdd(
+      @MessageBody() data: { sessionId: string; issue: IssueEntity },
+      @ConnectedSocket() client: Socket,
+    ) {
+      const userId = client.id;
+      const { issue, sessionId } = data;
+      const newIssue = this.issueService.createIssue(issue,  sessionId);
+      this.server.to(userId).emit('session:issue:add', newIssue);
+    }
+
+    @SubscribeMessage('session:issue:update')
+    async onSessionIssueUpdate(
+      @MessageBody() data: { issueId: string; issueData: IssueDto, sessionId: string; },
+      @ConnectedSocket() client: Socket,
+    ) {
+      const userId = client.id;
+      const { issueId, issueData, sessionId } = data;
+      const updateIssue = this.issueService.updateIssue(issueId, issueData, sessionId);
+      this.server.to(userId).emit('session:issue:update', updateIssue);
+    }
+
+    @SubscribeMessage('session:issue:remove')
+    async onSessionIssueRemove(
+      @MessageBody() data: { issueId: string; sessionId: string; },
+      @ConnectedSocket() client: Socket,
+    ) {
+      const userId = client.id;
+      const { issueId, sessionId } = data;
+      const issues = this.issueService.removeIssue(issueId, sessionId);
+      this.server.to(userId).emit('session:issue:update', issues);
+    }
 
   @SubscribeMessage('send_message')
   async listenForMessages(

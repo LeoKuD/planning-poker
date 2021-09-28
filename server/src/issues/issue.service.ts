@@ -17,6 +17,12 @@ export class IssueService {
     return issue;
   }
 
+  getAllIssue(sessionId: string): IssueEntity[] {
+    const session = this.sessionService.getSessionById(sessionId);
+    const { issues } =  session;
+    return issues;
+  }
+
   getIssueById(issueId: string, sessionId: string): IssueEntity {
     const session = this.sessionService.getSessionById(sessionId);
     const issue =  session.issues.find(item => item.id === issueId);
