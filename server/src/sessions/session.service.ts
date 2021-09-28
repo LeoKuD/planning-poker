@@ -43,7 +43,6 @@ export class SessionService {
 
   connectUser(user: UserEntity, sessionId: string) {
     const session = this.getSessionById(sessionId);
-
     session.members.push(user);
     if (user.isAdmin) {
       session.sessionDealerId = user.id;
