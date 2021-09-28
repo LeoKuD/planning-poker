@@ -1,11 +1,14 @@
 import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import EditIcon from '@material-ui/icons/Edit';
+import { IconButton } from '@material-ui/core';
+import coffeIcon from 'assets/icons/coffee.svg';
 import style from './index.module.scss';
 
 type CardProps = {
   edit?: boolean,
   cardScore: number | null,
-  shortName: string,
+  shortName: string | null,
   onClick?: () => void,
   isCardSelected?: boolean
 }
@@ -35,12 +38,12 @@ const Card: FC<CardProps> = ({
     }
     if (onClick) {
       onClick();
-      // onClick invokes a function that sends a card which was selected by player.
+      // onClick invokes a function that sends a card which was selected by player. (game mode)
     }
   };
 
   return (
-    <div
+    <main
       role="none"
       className={isCardSelected ? style.card_selected : style.card}
       onClick={onCardClick}
@@ -50,15 +53,16 @@ const Card: FC<CardProps> = ({
         if edit is true, that means we are in settings component and we can change value of a card.
       */}
       <div className={style.shortName_top}>
+
         <p>{cardScore ? shortName : 'break'}</p>
+
         {edit && (
-        <button
-          type="button"
+        <IconButton
           className={style.pencil}
           onClick={() => { setShowInput((prevState: boolean) => !prevState); }}
         >
-          Pencil icon
-        </button>
+          <EditIcon />
+        </IconButton>
         ) }
       </div>
 
@@ -67,27 +71,34 @@ const Card: FC<CardProps> = ({
         else, an icon of a coffe cup is rendered.
       */}
       <div className={style.cardScore}>
-        {cardScore || 'coffee icon'}
+
+        {showInput || cardScore || <img src={coffeIcon} alt="break" />}
+
         {showInput && (
-        <form onSubmit={onSubmit}>
-          <input
-            className={style.input}
-            type="number"
-            min="1"
-            {...register('cardScore', {
-              maxLength: {
-                value: 2,
-                message: 'must be less than 100',
-              },
-            })}
-          />
-          <div className={style.error}>{errors.cardScore?.message}</div>
-        </form>
+          <>
+            <form onSubmit={onSubmit}>
+              <input
+                className={style.input}
+                type="number"
+                min="1"
+                {...register('cardScore', {
+                  maxLength: {
+                    value: 2,
+                    message: 'from 1 - 100',
+                  },
+                })}
+              />
+            </form>
+            <p className={style.error}>{errors.cardScore?.message}</p>
+          </>
         )}
       </div>
 
-      <div className={style.shortName_bottom}>{cardScore ? shortName : 'break'}</div>
-    </div>
+      <div className={style.shortName_bottom}>
+        <p>{cardScore ? shortName : 'break'}</p>
+      </div>
+
+    </main>
   );
 };
 
