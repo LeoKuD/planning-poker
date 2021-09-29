@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Switch } from '@material-ui/core';
 import tempIcon from 'assets/images/header-logo.svg';
 import { useHistory } from 'react-router';
+import { User } from 'types/index';
 import style from './index.module.scss';
 
 enum FormControls {
@@ -24,9 +25,10 @@ type FormData = {
 type LoginFormProps = {
   userImage?: string,
   closeForm: () => void,
+  isAdmin: boolean
 }
 
-const LoginForm: FC<LoginFormProps> = ({ userImage = tempIcon, closeForm }) => {
+const LoginForm: FC<LoginFormProps> = ({ userImage = tempIcon, closeForm, isAdmin = false }) => {
   const history = useHistory();
   const {
     register,
@@ -36,7 +38,8 @@ const LoginForm: FC<LoginFormProps> = ({ userImage = tempIcon, closeForm }) => {
   } = useForm();
 
   const onSubmit = handleSubmit((data: FormData) => {
-    console.log(data);
+    const user: Partial<User> = { ...data, isAdmin };
+    console.log('user', user);
     reset();
     history.push('/lobby');
   });

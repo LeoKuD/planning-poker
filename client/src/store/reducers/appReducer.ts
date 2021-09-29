@@ -1,42 +1,43 @@
-import { Action } from 'types/index';
-import * as types from 'store/actions/app/types';
-
-export interface User {
-  userId: string;
-  firstName: string;
-  lastName: string;
-  position: string;
-  avatarUrl: string;
-  isAdmin: boolean;
-  isObserver: boolean;
-}
+import {
+  Action, Issue, User, APP_CLIENT,
+} from 'types/index';
+import * as types from '../actions/app/types';
 
 export const initialState: {
+  ownerId: string;
   userId: string;
-  lobbyId: string;
-  team: User[];
-  isAdmin: boolean;
-  isSessionValid: any;
+  id: string;
+  members: User[];
+  issues: Issue[];
+  sessionTitle: string;
+  inviteLink: string;
   sessionSettings: any;
+  isSessionValid: boolean;
 } = {
+  ownerId: '',
   userId: '',
-  lobbyId: '',
-  team: [],
-  isAdmin: false,
-  isSessionValid: false,
+  id: '',
+  members: [],
+  issues: [],
+  sessionTitle: '',
+  inviteLink: '',
   sessionSettings: '',
+  isSessionValid: false,
 
 };
 
-export const appReducer = (state = initialState, action: Action): any => {
+export const appReducer = (state = initialState, action: Action): APP_CLIENT => {
   switch (action.type) {
     case types.CREATE_SESSION:
       return {
         ...state,
-        lobbyId: action.payload.sessionId,
-        userId: action.payload.sessionDealerId,
-        team: action.payload.team,
-        isAdmin: true,
+        id: action.payload.id,
+        userId: action.payload.userId,
+        ownerId: action.payload.ownerId,
+        sessionTitle: action.payload.sessionTitle,
+        inviteLink: action.payload.inviteLink,
+        members: action.payload.members,
+        issues: action.payload.issues,
       };
     case types.SET_SESSION_VALID:
       return {
@@ -46,16 +47,15 @@ export const appReducer = (state = initialState, action: Action): any => {
     case types.SET_CONNECTION: {
       return {
         ...state,
-        lobbyId: action.payload.sessionId,
+        id: action.payload.sessionId,
         userId: action.payload.sessionDealerId,
-        team: action.payload.team,
-        isAdmin: false,
+        members: action.payload.team,
       };
     }
     case types.ADD_NEW_USER: {
       return {
         ...state,
-        team: [...state.team, action.payload],
+        members: [...state.members, action.payload],
       };
     }
     case types.START_SESSION: {

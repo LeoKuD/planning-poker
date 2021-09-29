@@ -5,14 +5,14 @@ import { apiConfig } from 'api/config';
 import { APP_CLIENT } from 'types';
 import { SocketContext } from 'utils/socketContext';
 import { useDispatch } from 'react-redux';
-// import {
-//   createLobbyAC,
-//   setConnectionAC,
-//   setSessionValidAC,
-// } from 'store/actions/app/actions';
+import {
+  createLobbyAC,
+  setConnectionAC,
+  setSessionValidAC,
+} from 'store/actions/app/actions';
 import { getSessionId } from 'utils';
 import Modal from 'components/Modal';
-import { createLobbyAPI, removeLobbyAPI, validateLobby } from 'api/api';
+import { createLobby, removeLobby, validateLobby } from 'api/api';
 import StartYourPlanning from './StartYourPlanning';
 import ConnectToLobby from './ConnectToLobby';
 
@@ -23,6 +23,7 @@ const Home: React.FC<HTMLElement> = () => {
   const [showConnectInfo, setShowConnectInfo] = useState(false);
   const [session, setSession] = useState({} as Partial<APP_CLIENT>);
   const [isSessionValid, setIsSessionValid] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -34,29 +35,20 @@ const Home: React.FC<HTMLElement> = () => {
   }, []);
 
   useEffect(() => {
-    socket.on('session:created', (payload) => {
-      console.log('session:created-1', payload);
-      // dispatch(createLobbyAC(payload));
-      setSession({
-        id: payload.id,
-        inviteLink: payload.inviteLink,
-        // isAdmin: true,
-      });
+    socket.on('session:create', (payload) => {
+      dispatch(createLobbyAC(payload));
     });
 
     socket.on('session:validate', (payload) => {
-      console.log('session:validate', payload);
-      // dispatch(setSessionValidAC(payload));
-      setIsSessionValid(payload.isSessionValid);
+      dispatch(setSessionValidAC(payload));
     });
 
-    socket.on('session:connected', (payload) => {
+    socket.on('session:connect', (payload) => {
       console.log('session:connected', payload);
-      // dispatch(setConnectionAC(payload));
+      dispatch(setConnectionAC(payload));
       setSession({
         id: payload.id,
         inviteLink: payload.inviteLink,
-        // isAdmin: false,
       });
     });
 
@@ -72,14 +64,15 @@ const Home: React.FC<HTMLElement> = () => {
   }, []);
 
   const startNewGame = (): void => {
-    createLobbyAPI(socket, {
+    createLobby(socket, {
       sessionTitle: 'Spring',
     });
+    setIsAdmin(true);
     setShowConnectInfo(true); // TODO open form for dealer
   };
 
   const closeForm = (): void => {
-    removeLobbyAPI(socket, session.id ?? '');
+    removeLobby(socket, session.id ?? '');
     history.push('/');
     setShowConnectInfo(false);
   };
@@ -87,6 +80,7 @@ const Home: React.FC<HTMLElement> = () => {
   const connect = (url: string): void => {
     const sessionId = getSessionId(url);
     validateLobby(socket, sessionId);
+    setIsAdmin(false);
     if (!isSessionValid) {
       // TODO message about error
       return;
@@ -98,7 +92,7 @@ const Home: React.FC<HTMLElement> = () => {
     <>
       <h2>{welcomeMsg}</h2>
       {!showConnectInfo && <StartYourPlanning startNewGame={startNewGame} connect={connect} />}
-      {showConnectInfo && <Modal content={<ConnectToLobby closeForm={closeForm} />} />}
+      {showConnectInfo && <Modal content={<ConnectToLobby closeForm={closeForm} isAdmin={isAdmin} />} />}
     </>
   );
 };

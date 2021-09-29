@@ -5,8 +5,9 @@ import { UserEntity } from 'users/entities/user.entity';
 export interface SessionEntity extends InMemoryDBEntity {
   id: string;
   sessionTitle: string;
-  inviteLink: string;
-  sessionDealerId: string;
+  inviteLink?: string;
+  sessionDealerId?: string;
+  userId: string;
   members?: UserEntity[];
   issues?: IssueEntity[];
 }

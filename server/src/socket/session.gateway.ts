@@ -19,6 +19,7 @@ import { UserEntity } from 'users/entities/user.entity';
 import { SessionEntity } from 'sessions/entities/session.entity';
 import { IssueEntity } from 'issues/entities/issue.entity';
 import { IssueDto } from 'issues/dto/issue.dto';
+import { SessionDto } from 'sessions/dto/session.dto';
    
 @WebSocketGateway({ cors: true })
 export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -46,12 +47,13 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
 
   @SubscribeMessage('session:create')
   async onSessionCreation(
-    @MessageBody() data: Partial<SessionEntity>,
+    @MessageBody() data: Partial<SessionDto>,
     @ConnectedSocket() client: Socket,
   ) {
     const userId = client.id;
-    const session = this.sessionService.createSession({ ...data, userId });
-    this.server.to(userId).emit('session:created', session);
+    const session = this.sessionService.createSession({ ...data, userId } as SessionDto);
+    this.logger.log('session:create', session.id);
+    this.server.to(userId).emit('session:create', session);
   }
 
   @SubscribeMessage('session:validate')
@@ -60,9 +62,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     @ConnectedSocket() client: Socket,
   ) {
     const userId = client.id;
-    const response = {
-      isSessionValid: this.sessionService.isExistSession(sessionId),
-    };
+    const response = this.sessionService.isExistSession(sessionId);
     this.server.to(userId).emit('session:validate', response);
   }
 
@@ -77,7 +77,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     this.sessionService.connectUser(newUser, sessionId);
     client.join(sessionId);
     const session = this.sessionService.getSessionById(sessionId);
-    this.server.to(userId).emit('session:connected', session);
+    this.server.to(userId).emit('session:connect', session);
     client.broadcast.to(sessionId).emit('session:user:add', newUser);
   }
   // const dealer = this.userService.createUser(

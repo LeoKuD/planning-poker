@@ -6,6 +6,7 @@ import { generateId } from 'utils/generate-id.utils';
 import { UserEntity } from 'users/entities/user.entity';
 import { IssueEntity } from 'issues/entities/issue.entity';
 import { IssueDto } from 'issues/dto/issue.dto';
+import { SessionDto } from './dto/session.dto';
  
 @Injectable()
 export class SessionService {
@@ -21,7 +22,7 @@ export class SessionService {
     return sessionId;
   }
 
-  createSession(data): SessionEntity {
+  createSession(data: SessionDto): SessionEntity {
     const sessionId = this.getSessionId();
 
     const session = { ...data, id: sessionId, inviteLink: `/lobby/${sessionId}` }
