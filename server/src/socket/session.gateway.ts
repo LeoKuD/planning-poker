@@ -18,7 +18,6 @@ import { UserService } from 'users/user.service';
 import { UserEntity } from 'users/entities/user.entity';
 import { SessionEntity } from 'sessions/entities/session.entity';
 import { IssueEntity } from 'issues/entities/issue.entity';
-import { IssueService } from 'issues/issue.service';
 import { IssueDto } from 'issues/dto/issue.dto';
    
 @WebSocketGateway({ cors: true })
@@ -28,8 +27,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
    
   constructor(
     private readonly sessionService: SessionService,
-    private readonly userService: UserService,
-    private readonly issueService: IssueService
+    private readonly userService: UserService
   ) {}
   
   private logger: Logger = new Logger('SocketGateway');
@@ -105,7 +103,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
       @ConnectedSocket() client: Socket,
     ) {
       const userId = client.id;
-      const issues = this.issueService.getAllIssue(sessionId);
+      const issues = this.sessionService.getAllIssue(sessionId);
       this.server.to(userId).emit('session:issue:getAll', issues);
     }
 
@@ -116,7 +114,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     ) {
       const userId = client.id;
       const { issue, sessionId } = data;
-      const newIssue = this.issueService.createIssue(issue,  sessionId);
+      const newIssue = this.sessionService.createIssue(issue,  sessionId);
       this.server.to(userId).emit('session:issue:add', newIssue);
     }
 
@@ -127,7 +125,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     ) {
       const userId = client.id;
       const { issueId, issueData, sessionId } = data;
-      const updateIssue = this.issueService.updateIssue(issueId, issueData, sessionId);
+      const updateIssue = this.sessionService.updateIssue(issueId, issueData, sessionId);
       this.server.to(userId).emit('session:issue:update', updateIssue);
     }
 
@@ -138,7 +136,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     ) {
       const userId = client.id;
       const { issueId, sessionId } = data;
-      const issues = this.issueService.removeIssue(issueId, sessionId);
+      const issues = this.sessionService.removeIssue(issueId, sessionId);
       this.server.to(userId).emit('session:issue:update', issues);
     }
 

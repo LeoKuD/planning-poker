@@ -7,7 +7,6 @@ import { SessionModule } from 'sessions/session.module';
 import { UserModule } from './users/user.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { AvatarModule } from './avatar/avatar.module';
-import { IssuesModule } from 'issues/issues.module';
 
 @Module({
   imports: [
@@ -17,8 +16,7 @@ import { IssuesModule } from 'issues/issues.module';
     UserModule, 
     SessionModule, 
     CoreModule, 
-    AvatarModule,
-    IssuesModule,
+    AvatarModule
   ],
   controllers: [AppController],
   providers: [
