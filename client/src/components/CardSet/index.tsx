@@ -33,26 +33,29 @@ const CardSet: FC<CardSetProps> = ({ cards, edit = false }) => {
   };
 
   return (
-    <div className={style.cardSet}>
+    <>
       <SectionHeader header="Add card values:" />
-      <div className={style.cards}>
-        {cards.map((card) => (
-          <Card
-            edit={edit}
-            key={card.id}
-            cardScore={card.cardScore}
-            shortName={card.shortName}
-            isCardSelected={selectedCard === card.id}
-            onClick={() => { onCardClick(card.id); }}
-          />
-        ))}
-        {edit && (
-          <button onClick={onPlusBtnClick} type="button" className={style.plusCard}>
+      <div className={style.cardSet}>
+        <div className={style.cardSet__cards}>
+          {cards.map((card) => (
+            <Card
+              edit={edit}
+              key={card.id}
+              cardScore={card.cardScore}
+              shortName={card.shortName}
+              isCardSelected={selectedCard === card.id}
+              onClick={() => { onCardClick(card.id); }}
+            />
+          ))}
+          {edit && (
+          <button onClick={onPlusBtnClick} type="button" className={style.cardSet__plusCard}>
             <img src={plusIcon} alt="plusIcon" />
           </button>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </>
+
   );
 };
 

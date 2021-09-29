@@ -1,17 +1,34 @@
+@import '../../shared/styles/varibles';
+
 .cardSet{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    &__cards{
+        display: flex;
+        flex-direction: row;
+    }
+    &__plusCard{
+        width: $card-width-b;
+        height: $card-height-b;
+        margin: $margin-xs;
+        border: 0;
+        box-shadow: $shadow-a; 
+        border-radius: 15px;
+        cursor: pointer;
+    }
 }
-.cards{
-    display: flex;
-    flex-direction: row;
-}
-.plusCard{
-    width: 150px;
-    height: 250px;
-    margin: 5px;
-    border: 1px solid blue;
-    border-radius: 15px;
-    cursor: pointer;
+
+@media (max-width: $screen-sm) {
+    .cardSet{
+        &__plusCard{
+            width: $card-width-s;
+            height: $card-height-s;
+
+            img{
+                width: 50px;
+            }
+        }
+    }
 }

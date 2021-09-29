@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Switch } from '@material-ui/core';
 import Timer from 'components/Timer';
 import CardSet from 'components/CardSet';
+import SectionHeader from 'components/SectionHeader';
 import style from './index.module.scss';
 
 enum FormControls {
@@ -39,7 +40,7 @@ const cards = [{
 },
 {
   id: '2',
-  cardScore: 2,
+  cardScore: 999,
   shortName: 'SP',
 }];
 
@@ -55,8 +56,10 @@ const SettingsForm: FC = () => {
   const timerNeeded = watch(FormControls.timerNeeded);
 
   return (
-    <div className={style.form}>
-      <form className={style.form} onSubmit={onSubmit}>
+
+    <div className={style.container}>
+      <SectionHeader header="Game Settings:" />
+      <form className={style.container__form} onSubmit={onSubmit}>
 
         <div className={style.inputWrapper}>
           <label htmlFor={FormControls.scramMasterRole}>Scram master as player</label>
@@ -85,8 +88,11 @@ const SettingsForm: FC = () => {
               },
             })}
           />
-          <div className={style.error}>{errors.scoreType?.message}</div>
         </div>
+        <p className={style.error}>
+          {errors.scoreType?.message}
+          {errors.shortScoreType?.type === 'required' && 'This field is required!'}
+        </p>
 
         <div className={style.inputWrapper}>
           <label htmlFor={FormControls.shortScoreType}>Score type (Short)</label>
@@ -100,8 +106,12 @@ const SettingsForm: FC = () => {
               },
             })}
           />
-          <div className={style.error}>{errors.shortScoreType?.message}</div>
         </div>
+        <p className={style.error}>
+          {errors.shortScoreType?.message}
+          {errors.shortScoreType?.type === 'required' && 'This field is required!'}
+        </p>
+
         {timerNeeded && <Timer isRunningRound />}
 
         <input className={style.submit} type="submit" value="Temp confirm" />
@@ -109,6 +119,7 @@ const SettingsForm: FC = () => {
       </form>
       <CardSet cards={cards} edit />
     </div>
+
   );
 };
 

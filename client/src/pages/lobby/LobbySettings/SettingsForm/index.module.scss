@@ -1,9 +1,20 @@
-.form{
+@import '../../../../shared/styles/varibles';
 
+.container{
+    &__form{
+        display: grid;
+        place-items: start;
+        row-gap: 0.5em;
+    }
 }
+
 .inputWrapper{
-    
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
 }
-.inputField{
-    
+
+.error{
+    font-size: 12px;
+    color: $color-error;
 }

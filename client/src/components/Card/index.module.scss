@@ -4,8 +4,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 130px;
-    height: 200px;
+    width: $card-width-b;
+    height: $card-height-b;
     font-size: 18px;
     margin: $margin-xs;
     box-shadow: $shadow-a; 
@@ -49,10 +49,10 @@
     color: $color-error;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: $screen-sm) {
     .card, .card_selected{
-        width: 110px;
-        height: 165px;
+        width: $card-width-s;
+        height: $card-height-s;
         font-size: 14px;
     }
     
