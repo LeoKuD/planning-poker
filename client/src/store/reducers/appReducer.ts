@@ -38,6 +38,7 @@ export const appReducer = (state = initialState, action: Action): APP_CLIENT => 
         inviteLink: action.payload.inviteLink,
         members: action.payload.members,
         issues: action.payload.issues,
+        isSessionValid: true,
       };
     case types.SET_SESSION_VALID:
       return {
@@ -63,6 +64,9 @@ export const appReducer = (state = initialState, action: Action): APP_CLIENT => 
         ...state,
         sessionSettings: action.payload,
       };
+    }
+    case types.EXIT_SESSION: {
+      return initialState;
     }
     default:
       return state;

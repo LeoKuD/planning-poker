@@ -7,6 +7,7 @@ import { SocketContext } from 'utils/socketContext';
 import { useDispatch } from 'react-redux';
 import {
   createLobbyAC,
+  exitSessionAC,
   setConnectionAC,
   setSessionValidAC,
 } from 'store/actions/app/actions';
@@ -53,9 +54,7 @@ const Home: React.FC<HTMLElement> = () => {
     });
 
     socket.on('session:exit', (payload) => {
-      console.log('session:exit', payload);
-      // dispatch(setConnectionAC(payload));
-      setSession({});
+      dispatch(exitSessionAC(payload));
     });
 
     return () => {

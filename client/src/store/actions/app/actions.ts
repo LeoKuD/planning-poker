@@ -16,6 +16,11 @@ export const setConnectionAC = (data: any): Action => ({
   payload: data,
 });
 
+export const exitSessionAC = (state: Partial<APP_CLIENT>): Action => ({
+  type: types.EXIT_SESSION,
+  payload: state,
+});
+
 export const addNewUserAC = (newUser: User): Action => ({
   type: types.ADD_NEW_USER,
   payload: newUser,
