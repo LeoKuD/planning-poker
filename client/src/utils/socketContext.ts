@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 import { io } from 'socket.io-client';
-import { BASE_API_URL } from 'shared/constants';
+import { apiConfig } from 'api/config';
 
-export const socket = io(`${BASE_API_URL}`);
+export const socket = io(`${apiConfig.BASE_URL}`);
 export const SocketContext = createContext(socket);

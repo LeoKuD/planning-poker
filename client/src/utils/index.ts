@@ -12,6 +12,11 @@ export const cardName = (value: string): string => value.split('-')[0];
 
 export const cardScore = (value: string): number | null => parseInt(value.split('-')[1], 10);
 
+export const getSessionId = (url: string): string | null => {
+  const sessionId = url.split('/');
+  return sessionId[sessionId.length - 1];
+};
+
 export const setLocalStorageToken = (token: string): void => localStorage.setItem(
     process.env.REACT_APP_LOCAL_TOKEN as string,
     token,

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
-  Switch, Route, useHistory,
+  Switch, Route,
 } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import NotFound from 'components/NotFound';
 import Results from 'pages/results';
 import Lobby from 'pages/lobby';
@@ -10,18 +9,11 @@ import Game from 'pages/session';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Home from 'pages/home';
-import { getProfile } from './store/actions/auth/actions';
 
 import './App.scss';
 
 const App: React.FC<Record<string, never>> = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
   const isLoading = false;
-
-  useEffect(() => {
-    dispatch(getProfile(history));
-  }, []);
 
   return (
     <>

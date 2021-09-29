@@ -15,18 +15,37 @@ export enum ButtonTypes {
   secondary = 'secondary',
 }
 
+enum SessionStage {
+  connect = 'connect',
+  auth = 'auth',
+  lobby = 'lobby',
+  game = 'game',
+  results = 'results',
+}
+
 export interface User {
   id: string;
   firstName: string;
   lastName?: string;
   role: UserRole;
   position?: string;
-  avatar?: string
+  avatar?: string;
+  isAdmin?: boolean;
+  isObserver?: boolean;
 }
 
 export interface UserData extends User {
   isYou?: boolean;
   showDeleteButton?: boolean
+}
+
+interface Settings {
+  roundTime: number;
+  useTimer: boolean;
+  scoreType: string;
+  autoRevealingCards: boolean;
+  scoreTypeShort: string;
+  cardSet: number[];
 }
 
 export interface Message {
@@ -62,6 +81,11 @@ export interface RoundScore {
   score: Result
 }
 
+export interface Round {
+  isStarted: boolean,
+  currentIssueId: null | string,
+}
+
 export interface IButton {
   onClick: () => void;
   children: string;
@@ -80,6 +104,14 @@ export interface IRoundControls {
   isRunning: boolean;
 }
 
+// TODO delete later
+export interface Card {
+  id: number;
+  shortName: string;
+  cardScore: number;
+}
+
+// TODO delete later
 export interface Game {
   id: string;
   inviteLink: string;
@@ -90,29 +122,24 @@ export interface Game {
   resultGame: Result;
 }
 
-export type UserCreds = {
-  email: string;
-  password: string;
-};
-
-export type CurrentUser = {
-  id: string;
-  createdOn: Date;
-  email: string;
-  token?: string;
-};
-
 export type Action = {
   type: string;
   payload?: any;
 };
 
 export interface IStore {
-  auth: IAuth;
+  session: APP_CLIENT;
 }
 
-export interface IAuth {
-  currentUser: CurrentUser | null;
-  err: any;
-  isLoading: boolean;
+export interface APP_CLIENT {
+  owner: User | null;
+  issues: Issue[];
+  members: User[];
+  chat: Message[];
+  settings: Settings;
+  id: string | null;
+  sessionTitle: string;
+  sessionStage: SessionStage | null;
+  inviteLink: string | null;
+  round: Round;
 }

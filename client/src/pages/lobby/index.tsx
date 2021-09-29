@@ -13,13 +13,13 @@ import SessionInfo from 'pages/session/SessionInfo';
 import SessionScore from 'pages/session/SessionScore';
 import LobbySetting from 'pages/lobby/LobbySettings/SettingsForm';
 // import SessionControl from 'session/components/SessionControl';
-import { BASE_API_URL } from 'shared/constants';
+import { apiConfig } from 'api/config';
 import style from './index.module.scss';
 
 const Lobby: React.FC<HTMLElement> = () => {
   const history = useHistory();
 
-  const socket = io(`${BASE_API_URL}`);
+  const socket = io(`${apiConfig.BASE_URL}`);
   const sessionId = 'IU43E';
   const modeGame = true;
   const scramMaster = true;

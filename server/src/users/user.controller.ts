@@ -11,7 +11,7 @@ import { InMemoryDBService, InMemoryDBEntityAsyncController } from '@nestjs-addo
 import { UserEntity } from './entities/user.entity';
 import { UserDto } from './dto/user.dto';
 
-@Controller('user')
+@Controller('users')
 export class UserController extends InMemoryDBEntityAsyncController<UserEntity> {
     constructor(private userService: InMemoryDBService<UserEntity>) {
         super(userService);

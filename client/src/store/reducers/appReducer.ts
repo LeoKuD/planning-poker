@@ -1,5 +1,5 @@
-import { IAuth, Action } from '../../types';
-import * as types from '../actions/auth/types';
+import { Action } from 'types/index';
+import * as types from 'store/actions/app/types';
 
 export interface User {
   userId: string;
