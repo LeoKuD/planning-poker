@@ -48,9 +48,7 @@ export const appReducer = (state = initialState, action: Action): APP_CLIENT => 
     case types.SET_CONNECTION: {
       return {
         ...state,
-        id: action.payload.sessionId,
-        userId: action.payload.sessionDealerId,
-        members: action.payload.team,
+        ownerId: action.payload.ownerId,
       };
     }
     case types.ADD_NEW_USER: {
