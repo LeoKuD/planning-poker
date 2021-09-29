@@ -24,9 +24,13 @@ export class SessionService {
 
   createSession(data: SessionDto): SessionEntity {
     const sessionId = this.getSessionId();
-
-    const session = { ...data, id: sessionId, inviteLink: `/lobby/${sessionId}` }
-
+    const session = { 
+      ...data, 
+      id: sessionId, 
+      inviteLink: `/lobby/${sessionId}`,
+      members: [],
+      issues: []
+    }
     this.sessions.set(sessionId, session);
 
     return session;
@@ -46,10 +50,11 @@ export class SessionService {
 
   connectUser(user: UserEntity, sessionId: string) {
     const session = this.getSessionById(sessionId);
-    session.members.push(user);
     if (user.isAdmin) {
-      session.sessionDealerId = user.id;
+      session.ownerId = user.id;
     }
+    session.members.push(user);
+    console.log(session);
   }
 
   createIssue(issue: IssueEntity, sessionId: string): IssueEntity {

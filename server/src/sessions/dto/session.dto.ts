@@ -13,7 +13,7 @@ export class SessionDto {
 
   @IsString()
   @IsNotEmpty()
-  sessionDealerId?: string;
+  ownerId?: string;
   
   @IsString()
   @IsNotEmpty()

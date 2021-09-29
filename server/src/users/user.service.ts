@@ -5,14 +5,12 @@ import { UserEntity } from 'users/entities/user.entity';
 export class UserService {
   private user: Map<string, string> = new Map();
 
-  createUser(userData, useId, sessionId, isAdmin = false): UserEntity {
+  createUser(userData, userId, sessionId): UserEntity {
     const user = {
-      isAdmin,
-      isObserver: false,
       ...userData,
-      id: useId,
+      id: userId,
     } as UserEntity;
-    this.user.set(useId, sessionId)
+    this.user.set(user.id, sessionId)
     return user;
   }
 

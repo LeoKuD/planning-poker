@@ -6,7 +6,7 @@ export interface SessionEntity extends InMemoryDBEntity {
   id: string;
   sessionTitle: string;
   inviteLink?: string;
-  sessionDealerId?: string;
+  ownerId?: string;
   userId: string;
   members?: UserEntity[];
   issues?: IssueEntity[];
