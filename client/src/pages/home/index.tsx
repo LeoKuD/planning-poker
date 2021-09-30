@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { apiConfig } from 'api/config';
 import { APP_CLIENT } from 'types';
 import { SocketContext } from 'utils/socketContext';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   createLobbyAC,
   exitSessionAC,
@@ -14,6 +14,7 @@ import {
 import { getSessionId } from 'utils';
 import Modal from 'components/Modal';
 import { createLobby, removeLobby, validateLobby } from 'api/api';
+import { RootState } from 'store/types';
 import StartYourPlanning from './StartYourPlanning';
 import ConnectToLobby from './ConnectToLobby';
 
@@ -22,9 +23,8 @@ const Home: React.FC<HTMLElement> = () => {
   const socket = useContext(SocketContext);
   const [welcomeMsg, setWelcomeMsg] = useState<string>('');
   const [showConnectInfo, setShowConnectInfo] = useState(false);
-  const [session, setSession] = useState({} as Partial<APP_CLIENT>);
-  const [isSessionValid, setIsSessionValid] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const { id, isSessionValid } = useSelector((state: RootState) => state.app);
 
   const dispatch = useDispatch();
 
@@ -45,12 +45,7 @@ const Home: React.FC<HTMLElement> = () => {
     });
 
     socket.on('session:connect', (payload) => {
-      console.log('session:connected', payload);
       dispatch(setConnectionAC(payload));
-      setSession({
-        id: payload.id,
-        inviteLink: payload.inviteLink,
-      });
     });
 
     socket.on('session:exit', (payload) => {
@@ -71,7 +66,7 @@ const Home: React.FC<HTMLElement> = () => {
   };
 
   const closeForm = (): void => {
-    removeLobby(socket, session.id ?? '');
+    removeLobby(socket, id ?? '');
     history.push('/');
     setShowConnectInfo(false);
   };
@@ -79,11 +74,11 @@ const Home: React.FC<HTMLElement> = () => {
   const connect = (url: string): void => {
     const sessionId = getSessionId(url);
     validateLobby(socket, sessionId);
-    setIsAdmin(false);
     if (!isSessionValid) {
       // TODO message about error
       return;
     }
+    setIsAdmin(false);
     setShowConnectInfo(true); // TODO open form for player
   };
 

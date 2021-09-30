@@ -1,9 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Switch } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { SocketContext } from 'utils/socketContext';
 import tempIcon from 'assets/images/header-logo.svg';
 import { useHistory } from 'react-router';
-import { User } from 'types/index';
+import { connectToLobby } from 'api/api';
+import { RootState } from 'store/types';
+import { addNewUserAC, setConnectionAC } from 'store/actions/app/actions';
 import style from './index.module.scss';
 
 enum FormControls {
@@ -30,6 +34,9 @@ type LoginFormProps = {
 
 const LoginForm: FC<LoginFormProps> = ({ userImage = tempIcon, closeForm, isAdmin = false }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const socket = useContext(SocketContext);
+  const { id } = useSelector((state: RootState) => state.app);
   const {
     register,
     handleSubmit,
@@ -37,17 +44,36 @@ const LoginForm: FC<LoginFormProps> = ({ userImage = tempIcon, closeForm, isAdmi
     reset,
   } = useForm();
 
-  const onSubmit = handleSubmit((data: FormData) => {
-    const user: Partial<User> = { ...data, isAdmin };
-    console.log('user', user);
+  const onSubmit = handleSubmit((userData: FormData) => {
+    connectToLobby(socket, id, {
+      ...userData,
+      isAdmin,
+    });
     reset();
-    history.push('/lobby');
+    // history.push(`/lobby/${id}`);
   });
 
   const closeFormHandler = (): void => {
     reset();
     closeForm();
+    history.push('/');
   };
+
+  useEffect(() => {
+    socket.on('session:user:add', (payload) => {
+      console.log(payload);
+      dispatch(addNewUserAC(payload));
+    });
+
+    socket.on('session:connect', (payload) => {
+      console.log(payload);
+      dispatch(setConnectionAC(payload));
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <form className={style.form} onSubmit={onSubmit}>
