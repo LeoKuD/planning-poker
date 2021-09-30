@@ -1,3 +1,5 @@
+@import '../src/shared/styles/varibles';
+
 .App {
   text-align: center;
   font-family: 'Poppins';
@@ -11,8 +13,11 @@
   pointer-events: none;
 }
 .app-content {
-  height: calc(100vh - 180px);
-  overflow-x: auto;
+  display: grid;
+  justify-content: center;
+  margin-left: $margin-s;
+  height: $page-height;
+  overflow-x: auto; 
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -20,3 +25,4 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+

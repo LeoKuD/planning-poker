@@ -16,34 +16,32 @@ const App: React.FC<Record<string, never>> = () => {
   const isLoading = false;
 
   return (
-    <>
-      <div className="App">
-        <Header />
-        <section className="app-content">
-          {!isLoading ? (
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/game" component={Game} />
-              <Route path="/lobby" component={Lobby} />
-              <Route path="/results" component={Results} />
-              <Route path="*" component={NotFound} />
-            </Switch>
-          ) : (
-            <div
-              style={{
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              Loading...
-            </div>
-          )}
-        </section>
-        <Footer />
-      </div>
-    </>
+    <div className="App">
+      <Header />
+      <section className="app-content">
+        {!isLoading ? (
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/game" component={Game} />
+            <Route path="/lobby" component={Lobby} />
+            <Route path="/results" component={Results} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        ) : (
+          <div
+            style={{
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            Loading...
+          </div>
+        )}
+      </section>
+      <Footer />
+    </div>
   );
 };
 
