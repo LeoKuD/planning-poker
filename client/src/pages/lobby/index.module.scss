@@ -1,3 +1,5 @@
+$border: 1px solid rgb(194, 194, 194);
+
 main {
   display: grid;
   grid-template-columns: 2.5fr 1fr;
@@ -9,5 +11,7 @@ main {
     height: auto;
     display: flex;
     justify-content: center;
+    border-left: $border;
+    border-right: $border;
   }
 }

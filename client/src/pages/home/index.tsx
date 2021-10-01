@@ -96,7 +96,6 @@ const Home: React.FC<HTMLElement> = () => {
 
   return (
     <>
-      <h2>{welcomeMsg}</h2>
       {!showConnectInfo && <StartYourPlanning startNewGame={startNewGame} connect={connect} />}
       {showConnectInfo && <Modal content={<ConnectToLobby closeForm={closeForm} />} />}
     </>
