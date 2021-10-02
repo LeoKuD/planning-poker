@@ -51,7 +51,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     @ConnectedSocket() client: Socket,
   ) {
     const userId = client.id;
-    const session = this.sessionService.createSession({ ...data, userId } as SessionDto);
+    const session = this.sessionService.createSession({ ...data } as SessionDto);
     this.logger.log('session:create', session.id);
     client.join(session.id);
     this.server.to(userId).emit('session:create', session);
@@ -64,8 +64,11 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
   ) {
     const userId = client.id;
     const response = this.sessionService.isExistSession(sessionId);
+    const session = response 
+      ? this.sessionService.getSessionById(sessionId)
+      : {} as SessionEntity;
     this.logger.log('session:validate', sessionId, response);
-    this.server.to(userId).emit('session:validate', response);
+    this.server.to(userId).emit('session:validate', { response, session });
   }
 
   @SubscribeMessage('session:connect')
@@ -80,8 +83,8 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     this.sessionService.connectUser(newUser, sessionId);
     client.join(sessionId);
     const session = this.sessionService.getSessionById(sessionId);
-    this.server.to(user.id).emit('session:connect', session);
-    client.broadcast.to(sessionId).emit('session:user:add', newUser);
+    this.server.to(userId).emit('session:connect', {session, userId});
+    // client.broadcast.to(sessionId).emit('session:user:add', newUser.firstName);
   }
 
   @SubscribeMessage('session:exit')

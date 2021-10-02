@@ -31,6 +31,7 @@ export class SessionService {
 
   createSession(data: SessionDto): SessionEntity {
     const sessionId = this.getSessionId();
+    console.log('data', data)
     const session = { 
       ...data, 
       id: sessionId, 
@@ -41,7 +42,6 @@ export class SessionService {
     this.sessions.set(sessionId, session);
     console.log('sessions->', this.sessions.size);
     this.getAllKey();
-    
     return session;
   }
 
@@ -60,6 +60,7 @@ export class SessionService {
 
   connectUser(user: UserEntity, sessionId: string) {
     const session = this.getSessionById(sessionId);
+    console.log('connect->', session);
     if (user.isAdmin) {
       session.ownerId = user.id;
     }
