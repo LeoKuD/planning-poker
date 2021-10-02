@@ -12,7 +12,6 @@ export const initialState: {
   sessionTitle: string;
   inviteLink: string;
   sessionSettings: any;
-  isSessionValid: boolean;
 } = {
   ownerId: '',
   userId: '',
@@ -22,8 +21,6 @@ export const initialState: {
   sessionTitle: '',
   inviteLink: '',
   sessionSettings: '',
-  isSessionValid: false,
-
 };
 
 export const appReducer = (state = initialState, action: Action): APP_CLIENT => {
@@ -31,24 +28,19 @@ export const appReducer = (state = initialState, action: Action): APP_CLIENT => 
     case types.CREATE_SESSION:
       return {
         ...state,
-        id: action.payload.id,
-        userId: action.payload.userId,
-        ownerId: action.payload.ownerId,
-        sessionTitle: action.payload.sessionTitle,
-        inviteLink: action.payload.inviteLink,
-        members: action.payload.members,
-        issues: action.payload.issues,
-        isSessionValid: true,
+        ...action.payload,
       };
     case types.SET_SESSION_VALID:
       return {
         ...state,
-        isSessionValid: action.payload,
+        ...action.payload.session,
+        isSessionValid: action.payload.response,
       };
     case types.SET_CONNECTION: {
       return {
         ...state,
-        ownerId: action.payload.ownerId,
+        ...action.payload.session,
+        userId: action.payload.userId,
       };
     }
     case types.ADD_NEW_USER: {

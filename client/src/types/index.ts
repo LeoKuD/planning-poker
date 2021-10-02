@@ -142,7 +142,6 @@ export interface APP_CLIENT {
   id: string | null;
   sessionTitle: string;
   sessionStage?: SessionStage | null;
-  isSessionValid: boolean;
   inviteLink: string | null;
   round?: Round;
 }

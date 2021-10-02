@@ -63,7 +63,7 @@ export const connectToLobby = (socket: Socket, sessionId: string, user: Omit<Use
 };
 
 export const removeLobby = (socket: Socket, sessionId: string | null): void => {
-  socket.emit('session:exit', { sessionId });
+  socket.emit('session:exit', sessionId);
 };
 
 export const startSession = (socket: Socket): void => {

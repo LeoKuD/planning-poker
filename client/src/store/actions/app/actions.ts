@@ -6,9 +6,9 @@ export const createLobbyAC = (state: Partial<APP_CLIENT>): Action => ({
   payload: state,
 });
 
-export const setSessionValidAC = (data: boolean): Action => ({
+export const setSessionValidAC = (state: Partial<APP_CLIENT>): Action => ({
   type: types.SET_SESSION_VALID,
-  payload: data,
+  payload: state,
 });
 
 export const setConnectionAC = (data: any): Action => ({
