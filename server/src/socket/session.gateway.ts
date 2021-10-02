@@ -53,6 +53,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     const userId = client.id;
     const session = this.sessionService.createSession({ ...data, userId } as SessionDto);
     this.logger.log('session:create', session.id);
+    client.join(session.id);
     this.server.to(userId).emit('session:create', session);
   }
 
@@ -63,7 +64,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
   ) {
     const userId = client.id;
     const response = this.sessionService.isExistSession(sessionId);
-    this.logger.log('session:validate', response);
+    this.logger.log('session:validate', sessionId, response);
     this.server.to(userId).emit('session:validate', response);
   }
 
@@ -74,7 +75,7 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
   ) {
     const userId = client.id;
     const { user, sessionId } = data;
-    this.logger.log('session:connect', userId);
+    this.logger.log('session:connect', sessionId, userId);
     const newUser = this.userService.createUser(user, userId, sessionId);
     this.sessionService.connectUser(newUser, sessionId);
     client.join(sessionId);
@@ -90,6 +91,8 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
   ) {
     const userId = client.id;
     const session = this.sessionService.removeSession(sessionId);
+    this.userService.removeAllUsesOfSession(sessionId);
+    this.logger.log('session:exit', sessionId);
     this.server.to(userId).emit('session:exit', session);
   }
 
@@ -101,7 +104,6 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     const userId = client.id;
     const { user, sessionId } = data;
     const newUser = this.userService.createUser(user, userId, sessionId);
-    // this.logger.log('user', newUser.firstName);
     this.sessionService.connectUser(newUser, sessionId);
     // this.server.to(userId).emit('session:user:add', newUser);
   }
