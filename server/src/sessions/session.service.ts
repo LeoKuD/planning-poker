@@ -7,6 +7,7 @@ import { UserEntity } from 'users/entities/user.entity';
 import { IssueEntity } from 'issues/entities/issue.entity';
 import { IssueDto } from 'issues/dto/issue.dto';
 import { SessionDto } from './dto/session.dto';
+import { getUniqueListBy } from 'utils/get-unique-by';
  
 @Injectable()
 export class SessionService {
@@ -22,6 +23,12 @@ export class SessionService {
     return sessionId;
   }
 
+  private getAllKey() {
+    return [...this.sessions].map(([key, val]) => {
+      console.log(key, val);
+    })[0]
+  }
+
   createSession(data: SessionDto): SessionEntity {
     const sessionId = this.getSessionId();
     const session = { 
@@ -32,7 +39,9 @@ export class SessionService {
       issues: []
     }
     this.sessions.set(sessionId, session);
-
+    console.log('sessions->', this.sessions.size);
+    this.getAllKey();
+    
     return session;
   }
 
@@ -42,6 +51,7 @@ export class SessionService {
 
   removeSession(sessionId: string): void {
     this.sessions.delete(sessionId);
+    console.log('sessions->', this.sessions.size);
   }
 
   isExistSession(sessionId: string): boolean {
@@ -54,6 +64,7 @@ export class SessionService {
       session.ownerId = user.id;
     }
     session.members.push(user);
+    session.members = getUniqueListBy(session.members, 'id')
     console.log(session);
   }
 
