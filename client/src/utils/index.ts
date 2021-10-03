@@ -1,3 +1,4 @@
+import { apiConfig } from 'api/config';
 import axios from 'axios';
 
 const option = {
@@ -17,16 +18,12 @@ export const getSessionId = (url: string): string | null => {
   return sessionId[sessionId.length - 1];
 };
 
-export const setLocalStorageToken = (token: string): void => localStorage.setItem(
-    process.env.REACT_APP_LOCAL_TOKEN as string,
-    token,
-);
-
-// eslint-disable-next-line arrow-body-style
-export const getLocalStorageToken = (): string => {
-  return localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN as string) as string;
-};
-
-export const setAxiosAuthToken = (token: string): void => {
-  axios.defaults.headers.common.Autorization = `Bearer ${token}`;
+export const uploadsUserAvatar = (avatarData: FileList): void => {
+  const data = new FormData();
+  data.append('image', [...avatarData][0]);
+  axios.post(`${apiConfig.BASE_URL}/api/avatar`, data)
+    .then((res) => {
+      console.log(res);
+      console.log(res.data);
+    });
 };
