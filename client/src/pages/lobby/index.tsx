@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { io } from 'socket.io-client';
 import {
   getLobbyIssues,
   getLobbyUsers,
@@ -13,13 +12,32 @@ import SessionInfo from 'pages/session/SessionInfo';
 import SessionScore from 'pages/session/SessionScore';
 import LobbySetting from 'pages/lobby/LobbySettings/SettingsForm';
 // import SessionControl from 'session/components/SessionControl';
-import { apiConfig } from 'api/config';
+import { useDispatch } from 'react-redux';
+import { SocketContext } from 'utils/socketContext';
+import { setConnectionAC } from 'store/actions/app/actions';
 import style from './index.module.scss';
 
 const Lobby: React.FC<HTMLElement> = () => {
   const history = useHistory();
+  const socket = useContext(SocketContext);
+  const dispatch = useDispatch();
 
-  const socket = io(`${apiConfig.BASE_URL}`);
+  useEffect(() => {
+    socket.connect();
+    // socket.on('session:user:add', (payload) => {
+    //   console.log(payload);
+    //   dispatch(addNewUserAC(payload));
+    // });
+
+    socket.on('session:connect', (payload) => {
+      dispatch(setConnectionAC(payload));
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   const sessionId = 'IU43E';
   const modeGame = true;
   const scramMaster = true;
