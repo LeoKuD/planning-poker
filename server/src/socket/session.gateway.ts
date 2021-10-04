@@ -20,6 +20,7 @@ import { SessionEntity } from 'sessions/entities/session.entity';
 import { IssueEntity } from 'issues/entities/issue.entity';
 import { IssueDto } from 'issues/dto/issue.dto';
 import { SessionDto } from 'sessions/dto/session.dto';
+import { SettingsEntity } from 'sessions/entities/settings.entity';
    
 @WebSocketGateway({ cors: true })
 export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -152,6 +153,17 @@ export class SessionGateway implements OnGatewayInit, OnGatewayConnection, OnGat
     const { issueId, sessionId } = data;
     const issues = this.sessionService.removeIssue(issueId, sessionId);
     this.server.to(userId).emit('session:issue:update', issues);
+  }
+
+  @SubscribeMessage('session:settings:update')
+  async onSessionSettingUpdate(
+    @MessageBody() data: { settingsData: SettingsEntity; sessionId: string; },
+    @ConnectedSocket() client: Socket,
+  ) {
+    const userId = client.id;
+    const { settingsData, sessionId } = data;
+    const settings = this.sessionService.updateSettings(settingsData, sessionId);
+    this.server.to(userId).emit('session:settings:update', settings);
   }
 
   @SubscribeMessage('send_message')
