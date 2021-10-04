@@ -1,18 +1,10 @@
+import { DEFAULT_SETTINGS } from 'shared/constants';
 import {
-  Action, Issue, User, APP_CLIENT,
+  Action, APP_CLIENT,
 } from 'types/index';
 import * as types from '../actions/app/types';
 
-export const initialState: {
-  ownerId: string;
-  userId: string;
-  id: string;
-  members: User[];
-  issues: Issue[];
-  sessionTitle: string;
-  inviteLink: string;
-  sessionSettings: any;
-} = {
+export const initialState: APP_CLIENT = {
   ownerId: '',
   userId: '',
   id: '',
@@ -20,7 +12,7 @@ export const initialState: {
   issues: [],
   sessionTitle: '',
   inviteLink: '',
-  sessionSettings: '',
+  sessionSettings: DEFAULT_SETTINGS,
 };
 
 export const appReducer = (state = initialState, action: Action): APP_CLIENT => {
@@ -43,12 +35,12 @@ export const appReducer = (state = initialState, action: Action): APP_CLIENT => 
         userId: action.payload.userId,
       };
     }
-    case types.ADD_NEW_USER: {
-      return {
-        ...state,
-        members: [...state.members, action.payload],
-      };
-    }
+    // case types.ADD_NEW_USER: {
+    //   return {
+    //     ...state,
+    //     members: [...state.members, action.payload],
+    //   };
+    // }
     case types.START_SESSION: {
       return {
         ...state,
