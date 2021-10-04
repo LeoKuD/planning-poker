@@ -1,19 +1,32 @@
+@import '../../shared/styles/varibles';
+
 .button {
     min-width: 190px;
     width: fit-content;
+    border: $border-width $border-style $color-gray;
+    border-radius: $border-radius-m;
     height: 50px;
-    font-size: 24px;
-    background-color: white;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: $color-white;
+    cursor: pointer;
+    
+    &:hover{
+        background-color: rgb(212, 212, 212);
+    }
 }
 .secondary {
-    background-color: #2B3A67;
-    color: white;
+    background-color: rgba(43, 58, 103);
+    color: $color-white;
+    &:hover{
+        background-color: rgb(58, 77, 134);
+    }
 }
 .primary{
-    background-color: white;
-    color: black;
+    background-color: $color-white;
+    color: $color-black;
 }
-@media (max-width: 1000px) {
+@media (max-width: $screen-sm) {
 
     .button {
         min-width: 120px;
