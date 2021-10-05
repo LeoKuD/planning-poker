@@ -39,7 +39,7 @@ const IssueCard: FC<IssueProps> = ({
     [styles.active]: current,
   });
   return (
-    <article className={issueClass}>
+    <li className={issueClass}>
       <div
         onClick={actionIssue}
         onKeyPress={actionIssue}
@@ -70,7 +70,7 @@ const IssueCard: FC<IssueProps> = ({
           </div>
         </div>
       )}
-    </article>
+    </li>
   );
 };
 

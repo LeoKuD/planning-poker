@@ -9,9 +9,8 @@ import LobbyChat from 'pages/lobby/LobbyChat';
 import LobbyIssues from 'pages/lobby/LobbyIssues';
 import LobbyTeam from 'pages/lobby/LobbyTeam';
 import SessionInfo from 'pages/session/SessionInfo';
-import SessionScore from 'pages/session/SessionScore';
-import LobbySetting from 'pages/lobby/LobbySettings/SettingsForm';
-// import SessionControl from 'session/components/SessionControl';
+import LobbySettings from 'pages/lobby/LobbySettings/SettingsForm';
+import SessionControls from 'components/SessionControls';
 import { useDispatch } from 'react-redux';
 import { SocketContext } from 'utils/socketContext';
 import { setConnectionAC } from 'store/actions/app/actions';
@@ -39,7 +38,6 @@ const Lobby: React.FC<HTMLElement> = () => {
   }, []);
 
   const sessionId = 'IU43E';
-  const modeGame = true;
   const scramMaster = true;
   const members = getLobbyUsers(sessionId);
   const owner = getSessionOwner(sessionId);
@@ -49,14 +47,18 @@ const Lobby: React.FC<HTMLElement> = () => {
     <main>
       <section className={style.content}>
         <SessionInfo user={owner} sessionId={sessionId} link="http:/" settingsMode={scramMaster} />
-        {/* <SessionControl modeMaster={scramMaster} /> */}
+        <SessionControls isSessionStarted={false} isUserDealer={scramMaster} />
         <LobbyTeam header="Members:" members={members} />
-        <LobbyIssues header="Issues:" issues={issues} />
-        <LobbySetting />
+        {scramMaster
+          && (
+          <>
+            <LobbyIssues header="Issues:" issues={issues} />
+            <LobbySettings />
+          </>
+          )}
       </section>
       <aside className={style.content}>
-        {modeGame && <LobbyChat socket={socket} />}
-        {!modeGame && <SessionScore sessionId={sessionId} />}
+        <LobbyChat socket={socket} />
       </aside>
     </main>
   );

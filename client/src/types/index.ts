@@ -137,8 +137,7 @@ export interface APP_CLIENT {
   issues: Issue[];
   members: User[];
   chat?: Message[];
-  // sessionSettings?: Settings;
-  sessionSettings?: any;
+  sessionSettings?: Settings | null;
   id: string | null;
   sessionTitle: string;
   sessionStage?: SessionStage | null;

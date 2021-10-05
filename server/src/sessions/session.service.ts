@@ -8,6 +8,7 @@ import { IssueEntity } from 'issues/entities/issue.entity';
 import { IssueDto } from 'issues/dto/issue.dto';
 import { SessionDto } from './dto/session.dto';
 import { getUniqueListBy } from 'utils/get-unique-by';
+import { SettingsEntity } from './entities/settings.entity';
  
 @Injectable()
 export class SessionService {
@@ -37,7 +38,7 @@ export class SessionService {
       id: sessionId, 
       inviteLink: `/lobby/${sessionId}`,
       members: [],
-      issues: []
+      issues: [],
     }
     this.sessions.set(sessionId, session);
     console.log('sessions->', this.sessions.size);
@@ -106,5 +107,10 @@ export class SessionService {
         : [])
     ];
     return issues;
+  }
+
+  updateSettings(settingsData: SettingsEntity, sessionId: string): void {
+    const session = this.getSessionById(sessionId);
+      session.sessionSettings = { ...settingsData };
   }
 }

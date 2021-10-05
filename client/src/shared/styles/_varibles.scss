@@ -12,9 +12,9 @@ $color-error:#FF1E00;
 $color-space-cadet: rgba(43, 58, 103, 1);
 $color-dark-blue: rgba(73, 106, 129, 1);
 $color-cadet-blue: rgba(102, 153, 155, 1);
+$color-gray: gray;
 $color-base-sage: rgba(179, 175, 143, 1);
 $color-melloy-apricot: rgba(255, 196, 130, 1);
-
 
 //BORDERS
 $border-style: solid;
@@ -30,9 +30,11 @@ $margin-m: 20px;
 $margin-l: 30px;
 $margin-xl: 50px;
 
-$padding-s: $margin-s $margin-s+5;
-$padding-m: $margin-m;
-$padding-l: $margin-m+10px $margin-l;
+$padding-xs: 5px;
+$padding-s: 10px;
+$padding-m: 20px;
+$padding-l: 30px;
+$padding-xl: 50px;
 
 //SHADOWS
 $shadow-a: 0 3px 3px #808080;
