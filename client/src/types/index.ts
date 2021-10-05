@@ -27,7 +27,7 @@ export interface User {
   id: string;
   firstName: string;
   lastName?: string;
-  role: UserRole;
+  role?: UserRole;
   position?: string;
   avatar?: string;
   isAdmin?: boolean;
@@ -132,14 +132,15 @@ export interface IStore {
 }
 
 export interface APP_CLIENT {
-  owner: User | null;
+  ownerId: string | null;
+  userId: string | null;
   issues: Issue[];
   members: User[];
-  chat: Message[];
-  settings: Settings;
+  chat?: Message[];
+  sessionSettings?: Settings | null;
   id: string | null;
   sessionTitle: string;
-  sessionStage: SessionStage | null;
+  sessionStage?: SessionStage | null;
   inviteLink: string | null;
-  round: Round;
+  round?: Round;
 }

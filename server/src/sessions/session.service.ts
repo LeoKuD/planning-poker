@@ -6,6 +6,9 @@ import { generateId } from 'utils/generate-id.utils';
 import { UserEntity } from 'users/entities/user.entity';
 import { IssueEntity } from 'issues/entities/issue.entity';
 import { IssueDto } from 'issues/dto/issue.dto';
+import { SessionDto } from './dto/session.dto';
+import { getUniqueListBy } from 'utils/get-unique-by';
+import { SettingsEntity } from './entities/settings.entity';
  
 @Injectable()
 export class SessionService {
@@ -21,13 +24,25 @@ export class SessionService {
     return sessionId;
   }
 
-  createSession(data): SessionEntity {
+  private getAllKey() {
+    return [...this.sessions].map(([key, val]) => {
+      console.log(key, val);
+    })[0]
+  }
+
+  createSession(data: SessionDto): SessionEntity {
     const sessionId = this.getSessionId();
-
-    const session = { ...data, id: sessionId, inviteLink: `/lobby/${sessionId}` }
-
+    console.log('data', data)
+    const session = { 
+      ...data, 
+      id: sessionId, 
+      inviteLink: `/lobby/${sessionId}`,
+      members: [],
+      issues: [],
+    }
     this.sessions.set(sessionId, session);
-
+    console.log('sessions->', this.sessions.size);
+    this.getAllKey();
     return session;
   }
 
@@ -37,6 +52,7 @@ export class SessionService {
 
   removeSession(sessionId: string): void {
     this.sessions.delete(sessionId);
+    console.log('sessions->', this.sessions.size);
   }
 
   isExistSession(sessionId: string): boolean {
@@ -45,10 +61,13 @@ export class SessionService {
 
   connectUser(user: UserEntity, sessionId: string) {
     const session = this.getSessionById(sessionId);
-    session.members.push(user);
+    console.log('connect->', session);
     if (user.isAdmin) {
-      session.sessionDealerId = user.id;
+      session.ownerId = user.id;
     }
+    session.members.push(user);
+    session.members = getUniqueListBy(session.members, 'id')
+    console.log(session);
   }
 
   createIssue(issue: IssueEntity, sessionId: string): IssueEntity {
@@ -88,5 +107,10 @@ export class SessionService {
         : [])
     ];
     return issues;
+  }
+
+  updateSettings(settingsData: SettingsEntity, sessionId: string): void {
+    const session = this.getSessionById(sessionId);
+      session.sessionSettings = { ...settingsData };
   }
 }

@@ -3,20 +3,31 @@ import { UserEntity } from 'users/entities/user.entity';
 
 @Injectable()
 export class UserService {
-  private user: Map<string, string> = new Map();
+  private usersMap: Map<string, string> = new Map();
 
-  createUser(userData, useId, sessionId, isAdmin = false): UserEntity {
+  createUser(
+    userData: Partial<UserEntity>, 
+    userId: string, 
+    sessionId: string
+  ): UserEntity {
     const user = {
-      isAdmin,
-      isObserver: false,
       ...userData,
-      id: useId,
+      id: userId,
     } as UserEntity;
-    this.user.set(useId, sessionId)
+    this.usersMap.set(user.id, sessionId); 
+    // console.log('users in userM->', this.usersMap.size);
     return user;
   }
 
+  removeAllUsesOfSession(sessionId: string) {
+    [...this.usersMap].map(([key, val]) => {
+      if (val === sessionId) {
+        this.usersMap.delete(key);
+      }
+    })[0]
+  }
+
   getSessionIdByUserId(userId: string) {
-    return this.user.get(userId)
+    return this.usersMap.get(userId)
   }
 }

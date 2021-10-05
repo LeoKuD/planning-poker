@@ -1,14 +1,11 @@
 import { IsString, IsNotEmpty } from 'class-validator';
+import { IssueEntity } from 'issues/entities/issue.entity';
 import { UserEntity } from 'users/entities/user.entity';
 
 export class SessionDto {
   @IsString()
   @IsNotEmpty()
-  id: string;
-
-  @IsString()
-  @IsNotEmpty()
-  inviteLink: string;
+  inviteLink?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -16,7 +13,13 @@ export class SessionDto {
 
   @IsString()
   @IsNotEmpty()
-  sessionDealerId: string;
+  ownerId?: string;
+  
+  @IsString()
+  @IsNotEmpty()
+  userId: string;
 
   members?: UserEntity[];
+
+  issues?: IssueEntity[];
 }

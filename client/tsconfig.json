@@ -23,7 +23,7 @@
     "strictFunctionTypes": true,
     "noImplicitThis": true,
     "strictBindCallApply": true,
-    "target": "es5",
+    "target": "es6",
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext"

@@ -1,8 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Switch } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { SocketContext } from 'utils/socketContext';
 import tempIcon from 'assets/images/header-logo.svg';
 import { useHistory } from 'react-router';
+import { connectToLobby } from 'api/api';
+import { setConnectionAC } from 'store/actions/app/actions';
 import style from './index.module.scss';
 
 enum FormControls {
@@ -24,10 +28,16 @@ type FormData = {
 type LoginFormProps = {
   userImage?: string,
   closeForm: () => void,
+  isAdmin: boolean,
+  sessionId: string
 }
 
-const LoginForm: FC<LoginFormProps> = ({ userImage = tempIcon, closeForm }) => {
+const LoginForm: FC<LoginFormProps> = ({
+  userImage = tempIcon, closeForm, isAdmin = false, sessionId,
+}) => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const socket = useContext(SocketContext);
   const {
     register,
     handleSubmit,
@@ -35,15 +45,35 @@ const LoginForm: FC<LoginFormProps> = ({ userImage = tempIcon, closeForm }) => {
     reset,
   } = useForm();
 
-  const onSubmit = handleSubmit((data: FormData) => {
-    console.log(data);
-    reset();
-    history.push('/lobby');
+  useEffect(() => {
+    // socket.on('session:user:add', (payload) => {
+    //   console.log(payload);
+    //   dispatch(addNewUserAC(payload));
+    // });
+
+    socket.on('session:connect', (payload) => {
+      dispatch(setConnectionAC(payload));
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  const onSubmit = handleSubmit((userData: FormData) => {
+    socket.connect();
+    connectToLobby(socket, sessionId, {
+      ...userData,
+      isAdmin,
+    });
+    // reset();
+    // history.push('/lobby');
   });
 
   const closeFormHandler = (): void => {
     reset();
     closeForm();
+    history.push('/');
   };
 
   return (
